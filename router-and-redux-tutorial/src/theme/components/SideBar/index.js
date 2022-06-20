@@ -3,21 +3,21 @@ import React from 'react'
 import { Outlet, Route, Routes } from 'react-router-dom'
 
 function SideBar() {
-  const Wrapper = () => (
+  const Wrapper = ({ children }) => (
     <Grid item xs={12} md={4}>
-      <Paper sx={{ minHeight: '100%' }}>
-        <Outlet />
-      </Paper>
+      <Paper sx={{ minHeight: '100%' }}>{children || <Outlet />}</Paper>
     </Grid>
   )
   return (
     <Routes>
-      <Route path='blog' element={<Wrapper />}>
-        <Route path=':posts' element={<>Posts by Category:</>} />
-      </Route>
-      <Route path='category' element={<Wrapper />}>
-        <Route path=':posts' element={<>This is a Category Page:</>} />
-      </Route>
+      <Route
+        path='blog/:posts'
+        element={<Wrapper>Posts by Category:</Wrapper>}
+      />
+      <Route
+        path='category/:posts'
+        element={<Wrapper>This is a Category Page:</Wrapper>}
+      />
     </Routes>
   )
 }

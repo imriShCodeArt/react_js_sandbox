@@ -1,8 +1,16 @@
 import React from 'react'
+import CategoryWidget from '../../cards/Category'
+import { Box, Grid, Paper } from '@mui/material'
 
 function Home() {
   return (
-    <div>Home</div>
+    <Grid item>
+      <Paper>
+        <Box minHeight={'90vh'}>
+          <CategoryWidget />
+        </Box>
+      </Paper>
+    </Grid>
   )
 }
 

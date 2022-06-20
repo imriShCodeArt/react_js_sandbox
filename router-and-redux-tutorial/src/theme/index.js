@@ -1,9 +1,8 @@
 import React from 'react'
 import { CssBaseline, ThemeProvider } from '@mui/material'
-import myTheme from './myTheme'
+import myTheme from './assets/myTheme'
 import AppBar from './components/AppBar'
 import Layout from './components/Layout'
-import SideBar from './components/SideBar'
 import { useLocation } from 'react-router-dom'
 
 function Theme({ children }) {
@@ -15,7 +14,7 @@ function Theme({ children }) {
     <ThemeProvider theme={myTheme()}>
       <CssBaseline />
       <AppBar />
-      <Layout sidebar={<SideBar />}>{children}</Layout>
+      <Layout>{children}</Layout>
     </ThemeProvider>
   )
 }

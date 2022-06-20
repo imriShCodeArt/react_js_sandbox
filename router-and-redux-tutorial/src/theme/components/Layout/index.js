@@ -1,17 +1,14 @@
 import { Grid } from '@mui/material'
 import React from 'react'
+import SideBar from '../SideBar'
 
-function Layout({ children, sidebar }) {
-  const Pad = () => <Grid item xs={0} md={1}></Grid>
-
+function Layout({ children }) {
   return (
-    <Grid container>
-      <Pad />
-      <Grid item flexGrow={1}>
+    <Grid container justifyContent={'center'}>
+      <Grid item flexGrow={1} xs={12} lg={10} xl={8}>
         {children}
       </Grid>
-      {sidebar}
-      <Pad />
+      <SideBar />
     </Grid>
   )
 }
