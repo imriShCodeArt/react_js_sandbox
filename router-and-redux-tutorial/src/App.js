@@ -1,4 +1,3 @@
-import { Typography } from '@mui/material'
 import Theme from './theme'
 
 import { Route, Routes } from 'react-router-dom'
@@ -12,6 +11,9 @@ function App() {
           path='/'
           element={<Home />}
         />
+        <Route path='entry'>
+        <Route path=':posts' element={<>ELM</>} />
+        </Route>
       </Routes>
     </Theme>
   )

@@ -1,20 +1,26 @@
-import React from 'react'
 import { CssBaseline, ThemeProvider } from '@mui/material'
+import { width } from '@mui/system'
+import React, { useEffect, useState } from 'react'
 import myTheme from './assets/myTheme'
 import AppBar from './components/AppBar'
-import Layout from './components/Layout'
-import { useLocation } from 'react-router-dom'
+import Drawer from './components/Drawer'
+import Navbar from './components/Navbar'
 
 function Theme({ children }) {
-  const location = useLocation()
-    .pathname.split('/')
-    .filter((item) => item !== '')
-
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  function closeDrawer() {
+    setDrawerOpen(false)
+  }
+  function openDrawer() {
+    setDrawerOpen(true)
+  }
   return (
     <ThemeProvider theme={myTheme()}>
       <CssBaseline />
-      <AppBar />
-      <Layout>{children}</Layout>
+      <AppBar width primaryAction={openDrawer} />
+      <Navbar />
+      <Drawer open={drawerOpen} closeAction={closeDrawer} />
+      {children}
     </ThemeProvider>
   )
 }

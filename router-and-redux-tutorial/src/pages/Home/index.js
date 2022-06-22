@@ -1,16 +1,19 @@
+import { Button } from '@mui/material'
 import React from 'react'
-import CategoryWidget from '../../cards/Category'
-import { Box, Grid, Paper } from '@mui/material'
+import Menu from '../../components/Menu'
 
 function Home() {
   return (
-    <Grid item>
-      <Paper>
-        <Box minHeight={'90vh'}>
-          <CategoryWidget />
-        </Box>
-      </Paper>
-    </Grid>
+    <div>
+    <div>
+      Home
+      <Menu triggerElm={'Categories'}>
+    <Button fullWidth size='small'>
+      c
+    </Button>
+      </Menu>
+      </div>
+      </div>
   )
 }
 
