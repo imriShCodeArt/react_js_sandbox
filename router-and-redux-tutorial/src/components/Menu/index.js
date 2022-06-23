@@ -6,15 +6,17 @@ import MenuButton from '../Button/MenuButton'
 function Menu({ id, name, triggerElm, children }) {
   const anchorId = name ? `${name}_button` : 'basic-button'
   const [anchorEl, setAnchorEl] = React.useState(null)
+  const [menuWidth, setMenuWidth] = React.useState(0)
   const open = Boolean(anchorEl)
   const handleClose = () => {
     setAnchorEl(null)
   }
-useEffect(()=>{
-  console.log(anchorEl)
-},[anchorEl])
+  useEffect(() => {
+    console.log(anchorEl)
+    anchorEl && setMenuWidth(anchorEl.firstChild.clientWidth)
+  }, [anchorEl])
   const Trigger = () => (
-    <MenuButton id={anchorId} open={open} setAnchor={setAnchorEl}>
+    <MenuButton open={open} setAnchor={setAnchorEl}>
       {triggerElm || 'Click'}
     </MenuButton>
   )
@@ -29,12 +31,18 @@ useEffect(()=>{
         MenuListProps={{
           'aria-labelledby': anchorId,
         }}
-        PaperProps={{  }}
+        PaperProps={{ sx: { marginLeft: '-16px' } }}
       >
         {children && children.length > 1 ? (
           children.map((c, index) => <MenuItem key={index}>{c}</MenuItem>)
         ) : (
-          <MenuItem sx={{ paddingY: '0', paddingX: '0', minHeight: 0 }}>
+          <MenuItem
+            sx={{
+              paddingY: '0',
+              paddingX: '0',
+              minWidth: menuWidth,
+            }}
+          >
             {children}
           </MenuItem>
         )}

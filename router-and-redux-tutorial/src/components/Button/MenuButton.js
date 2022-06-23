@@ -13,7 +13,7 @@ function MenuButton({
   ...rest
 }) {
   const handleClick = (event) => {
-    return setAnchor && setAnchor(event.currentTarget)
+    return setAnchor && setAnchor(event.currentTarget.parentNode)
   }
   return (
     <Root
