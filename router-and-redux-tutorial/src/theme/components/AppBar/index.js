@@ -1,28 +1,26 @@
 import React from 'react'
 
-import { AppBar as Root, Box, IconButton, Typography } from '@mui/material'
+import { Avatar, Box, IconButton, Typography } from '@mui/material'
 import Menu from '@mui/icons-material/Menu'
 import { useNavigate } from 'react-router-dom'
+import Root from './Root'
 
-function AppBar({ primaryAction, width, myRef }) {
+function AppBar({ primaryAction, ...rest }) {
   const navigate = useNavigate()
   return (
-    <Root ref={myRef}
-      sx={{ width: `${width}vw` }}
-      color={'primary'}
-      position='static'
-      variant='outlined'
-      elevation={0}
-    >
-      <Box height='2.5em' justifyContent={'space-between'} display='flex'>
-        <IconButton color='secondary' onClick={primaryAction}>
+    <Root>
+      <Box>
+        <IconButton color='secondary' onClick={() => primaryAction}>
           <Menu />
         </IconButton>
-        <IconButton color='secondary' onClick={() => navigate('/')}>
+        <IconButton color='secondary' onClick={() => navigate('')}>
           <Typography fontStyle={'italic'} fontWeight={700} variant='subtitle1'>
             LOGO
           </Typography>
         </IconButton>
+      </Box>
+      <Box>
+        <Avatar>A</Avatar>
       </Box>
     </Root>
   )

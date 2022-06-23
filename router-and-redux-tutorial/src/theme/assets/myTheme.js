@@ -4,8 +4,8 @@ import { createTheme } from '@mui/material/styles'
 export default () => {
   return createTheme({
     palette: {
-      primary: { main: orange['A700'] },
-      secondary: { main: '#FFF' },
+      primary: { main: orange['A700'], contrastText:'#FFF' },
+      secondary: { main: '#FFF', contrastText:'#000' },
     },
     typography: {
       fontWeightBold: 900,
@@ -13,18 +13,18 @@ export default () => {
       fontWeightLight: 100,
       fontWeightRegular: 500,
       fontFamily: ['"Montserrat"'].join(','),
-      h1:{
-        fontSize:'4.25rem',
-        fontWeight:300
+      h1: {
+        fontSize: '4.25rem',
+        fontWeight: 300,
       },
-      h2:{
-        fontSize:'2.75rem',
-        fontWeight:300,
+      h2: {
+        fontSize: '2.75rem',
+        fontWeight: 300,
       },
-      h3:{
-        fontSize:'1.75rem',
-        fontWeight:300,
-        letterSpacing:3
+      h3: {
+        fontSize: '1.75rem',
+        fontWeight: 300,
+        letterSpacing: 3,
       },
     },
     components: {
