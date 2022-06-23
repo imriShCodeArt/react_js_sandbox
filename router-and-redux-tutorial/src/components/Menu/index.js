@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Box, Menu as Root, MenuItem } from '@mui/material'
+import { Menu as Root, MenuItem, Box } from '@mui/material'
 import MenuButton from '../Button/MenuButton'
 
-function Menu({ id, name, triggerElm, children }) {
+function Menu({ id, name, rootEl, children, ...rest }) {
   const anchorId = name ? `${name}_button` : 'basic-button'
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [menuWidth, setMenuWidth] = React.useState(0)
@@ -12,16 +12,33 @@ function Menu({ id, name, triggerElm, children }) {
     setAnchorEl(null)
   }
   useEffect(() => {
-    console.log(anchorEl)
-    anchorEl && setMenuWidth(anchorEl.firstChild.clientWidth)
+    anchorEl && setMenuWidth(anchorEl.clientWidth)
   }, [anchorEl])
   const Trigger = () => (
     <MenuButton open={open} setAnchor={setAnchorEl}>
-      {triggerElm || 'Click'}
+      {rootEl || 'Click'}
     </MenuButton>
   )
+
+  const ChildElm = () => (
+    <>
+      {children && children.length > 1 ? (
+        children.map((c, index) => <MenuItem key={index}>{c}</MenuItem>)
+      ) : (
+        <MenuItem
+          sx={{
+            paddingY: '0',
+            paddingX: '0',
+          }}
+        >
+          {children}
+        </MenuItem>
+      )}
+    </>
+  )
+
   return (
-    <Box>
+    <Box display={'inline-block'} {...rest}>
       <Trigger />
       <Root
         id={id}
@@ -31,21 +48,9 @@ function Menu({ id, name, triggerElm, children }) {
         MenuListProps={{
           'aria-labelledby': anchorId,
         }}
-        PaperProps={{ sx: { marginLeft: '-16px' } }}
+        PaperProps={{ sx: { marginLeft: '-16px', minWidth: menuWidth } }}
       >
-        {children && children.length > 1 ? (
-          children.map((c, index) => <MenuItem key={index}>{c}</MenuItem>)
-        ) : (
-          <MenuItem
-            sx={{
-              paddingY: '0',
-              paddingX: '0',
-              minWidth: menuWidth,
-            }}
-          >
-            {children}
-          </MenuItem>
-        )}
+        <ChildElm />
       </Root>
     </Box>
   )

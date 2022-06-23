@@ -1,6 +1,21 @@
 import React from 'react'
-import { Button as Root } from '@mui/material'
+import { Box } from '@mui/material'
 import PropTypes from 'prop-types'
+
+function Root({ children, ...rest }) {
+  return (
+    <Box
+      {...rest}
+      sx={{
+        cursor: 'pointer',
+        textTransform: 'none',
+      }}
+      role={'button'}
+    >
+      {children}
+    </Box>
+  )
+}
 
 function MenuButton({
   id,
@@ -33,12 +48,22 @@ function MenuButton({
 MenuButton.propTypes = {
   id: PropTypes.string,
   hasPop: PropTypes.oneOf([
-    'true','menu','listbox','tree','grid','dialog',
+    'true',
+    'menu',
+    'listbox',
+    'tree',
+    'grid',
+    'dialog',
   ]), // describes the popup's type
-  controls: PropTypes.string,   // the id of the element which is controlled by this button 
+  controls: PropTypes.string, // the id of the element which is controlled by this button
   open: PropTypes.bool,
   color: PropTypes.oneOf([
-    'inherit','primary','secondary','info','warning','success',
+    'inherit',
+    'primary',
+    'secondary',
+    'info',
+    'warning',
+    'success',
   ]),
 }
 
