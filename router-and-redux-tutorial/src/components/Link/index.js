@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import TextButton from '../Button/TextButton'
+import TextButton from 'components/Button/TextButton'
 
 function Link({ to, text, color, children }) {
   const navigate = useNavigate()

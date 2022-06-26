@@ -1,6 +1,6 @@
 import { AppBar, Button, Container } from '@mui/material'
 import React from 'react'
-import Menu from '../../../components/Menu'
+import Menu from 'components/Menu'
 import Link from './components/Link'
 
 function NavBar() {

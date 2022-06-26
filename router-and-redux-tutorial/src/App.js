@@ -2,7 +2,7 @@ import React from 'react'
 import Theme from './theme'
 
 import { Route, Routes } from 'react-router-dom'
-import Home from './pages/Home'
+import Home from 'pages/Home'
 
 function App() {
   return (

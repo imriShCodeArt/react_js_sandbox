@@ -2,7 +2,7 @@ import { Grid, Paper } from '@mui/material'
 import React from 'react'
 import { Outlet, Route, Routes } from 'react-router-dom'
 
-import CategoryWidget from '../../../cards/Category'
+import CategoryWidget from 'cards/Category'
 
 function SideBar() {
   const Wrapper = ({ children }) => (

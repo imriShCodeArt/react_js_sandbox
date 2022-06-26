@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { Box, Divider, IconButton, Typography } from '@mui/material'
+import { Box, IconButton, Typography } from '@mui/material'
 import {Menu as MenuIcon} from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import Root from './Root'
-import Avatar from '../../../components/Avatar'
-import Menu from '../../../components/Menu'
-import Link from '../Navbar/components/Link'
+import Avatar from 'components/Avatar'
+import Menu from 'components/Menu'
+import Link from 'components/Link'
 
 function AppBar({ primaryAction, ...rest }) {
   const navigate = useNavigate()

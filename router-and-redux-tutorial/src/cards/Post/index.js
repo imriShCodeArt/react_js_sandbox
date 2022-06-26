@@ -1,4 +1,4 @@
-import { Card, CardHeader, Grid } from '@mui/material'
+import { Card, CardHeader } from '@mui/material'
 import React from 'react'
 
 function Post({ id, slug, title, date, authors, categories, ...rest}) {

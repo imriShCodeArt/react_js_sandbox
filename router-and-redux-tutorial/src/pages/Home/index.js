@@ -1,5 +1,5 @@
 import React from 'react'
-import BlogWidget from '../../cards/Blog'
+import BlogWidget from 'cards/Blog'
 import Page from '../Page'
 
 function Home() {
