@@ -1,0 +1,17 @@
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import TextButton from '../Button/TextButton'
+
+function Link({ to, text, color, children }) {
+  const navigate = useNavigate()
+  
+  return (
+    <TextButton  color={color} action={() => navigate(`${to}`)}>
+      {children || text}
+    </TextButton>
+  )
+}
+Link.defaultProps = {
+  color: 'inherit',
+}
+export default Link

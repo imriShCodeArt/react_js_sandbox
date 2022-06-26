@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Menu as Root, MenuItem, Box } from '@mui/material'
+import { Menu as Root, Box, Divider } from '@mui/material'
 import MenuButton from '../Button/MenuButton'
+import Item from './components/Item'
 
-function Menu({ id, name, rootEl, children, ...rest }) {
+function Menu({ id, name, rootEl, children, dense, divided, ...rest }) {
   const anchorId = name ? `${name}_button` : 'basic-button'
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [menuWidth, setMenuWidth] = React.useState(0)
@@ -23,16 +24,18 @@ function Menu({ id, name, rootEl, children, ...rest }) {
   const ChildElm = () => (
     <>
       {children && children.length > 1 ? (
-        children.map((c, index) => <MenuItem key={index}>{c}</MenuItem>)
+        children.map((c, index) => {
+          return (
+            <>
+              <Item dense={dense} key={index}>
+                {c}
+              </Item>
+              {index === divided - 1 && <Divider variant='middle' />}
+            </>
+          )
+        })
       ) : (
-        <MenuItem
-          sx={{
-            paddingY: '0',
-            paddingX: '0',
-          }}
-        >
-          {children}
-        </MenuItem>
+        <Item dense={dense}>{children}</Item>
       )}
     </>
   )
@@ -48,7 +51,7 @@ function Menu({ id, name, rootEl, children, ...rest }) {
         MenuListProps={{
           'aria-labelledby': anchorId,
         }}
-        PaperProps={{ sx: { marginLeft: '-16px', minWidth: menuWidth } }}
+        PaperProps={{ sx: { minWidth: menuWidth } }}
       >
         <ChildElm />
       </Root>
