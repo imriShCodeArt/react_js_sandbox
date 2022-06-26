@@ -5,13 +5,14 @@ export const postsSlice = createSlice({
   name: 'counter',
   initialState: myState.posts,
   reducers: {
-    // getAllPosts: (state) => {
-    //   state.value += 1
-    // },
+    addPost: (state, action) => {
+        const tmpPost = action.payload
+      state.posts += tmpPost
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const {  } = postsSlice.actions
+export const { addPost, } = postsSlice.actions
 
 export default postsSlice.reducer

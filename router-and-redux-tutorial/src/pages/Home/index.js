@@ -5,11 +5,11 @@ import Page from '../Page'
 import { useSelector } from 'react-redux'
 
 function Home() {
-  const posts = useSelector(state => state.posts)
-  console.log(posts)
+  const posts = useSelector((state) => state.posts)
+  const categories = useSelector((state) => state.categories)
   return (
     <Page>
-      <BlogWidget />
+      <BlogWidget categories={categories} posts={posts} />
     </Page>
   )
 }
