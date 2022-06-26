@@ -10,7 +10,7 @@ function Root({ children, width, ...rest }) {
       variant='outlined'
       elevation={0}
     >
-      <Box height='2.5em' justifyContent={'space-between'} display='flex'>
+      <Box alignItems={'baseline'} justifyContent={'space-between'} display='flex'>
         {children}
       </Box>
     </AppBar>

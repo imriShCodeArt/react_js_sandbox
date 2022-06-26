@@ -8,12 +8,12 @@ function NavBar() {
     <AppBar color='secondary' position='static'>
       <Container>
         <Menu rootEl={<Button color={'primary'}>Categories</Button>}>
-          <Link color='inherit' text={'Category 1'} to='cat-1' />
-          <Link color='inherit' text={'Category 2'} to='cat-2' />
-          <Link color='inherit' text={'Category 3'} to='cat-3' />
+          <Link text={'Category 1'} to='cat-1' />
+          <Link text={'Category 2'} to='cat-2' />
+          <Link text={'Category 3'} to='cat-3' />
         </Menu>
-        <Link text={'About'} to='about' />
-        <Link text={'Contact'} to='contact' />
+        <Link color='primary' text={'About'} to='about' />
+        <Link color='primary' text={'Contact'} to='contact' />
       </Container>
     </AppBar>
   )

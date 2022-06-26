@@ -1,11 +1,11 @@
-import { Box } from '@mui/material'
+import { Grid } from '@mui/material'
 import React from 'react'
 
 function Page({ children, ...rest }) {
   return (
-    <Box {...rest}>
+    <Grid justifyContent={'center'} container {...rest}>
         {children}
-    </Box>
+    </Grid>
   )
 }
 

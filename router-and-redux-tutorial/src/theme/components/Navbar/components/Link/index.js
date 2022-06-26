@@ -6,12 +6,12 @@ function Link({ to, text, color, children }) {
   const navigate = useNavigate()
   
   return (
-    <TextButton color={color} action={() => navigate(`${to}`)}>
+    <TextButton  color={color} action={() => navigate(`${to}`)}>
       {children || text}
     </TextButton>
   )
 }
 Link.defaultProps = {
-  color: 'primary',
+  color: 'inherit',
 }
 export default Link
