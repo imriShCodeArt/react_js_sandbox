@@ -14,6 +14,8 @@ module.exports = {
       cards: path.resolve(__dirname, './src/cards'),
       pages: path.resolve(__dirname, './src/pages'),
       theme: path.resolve(__dirname, './src/theme'),
+      features: path.resolve(__dirname, './src/features'),
+      assets: path.resolve(__dirname, './src/assets'),
     },
   },
 

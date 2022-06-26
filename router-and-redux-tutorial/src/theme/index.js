@@ -1,6 +1,6 @@
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import React, { useState } from 'react'
-import myTheme from './assets/myTheme'
+import myTheme from 'assets/myTheme'
 import AppBar from './components/AppBar'
 import Drawer from './components/Drawer'
 import Navbar from './components/Navbar'
