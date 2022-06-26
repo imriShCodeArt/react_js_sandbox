@@ -26,12 +26,10 @@ function Menu({ id, name, rootEl, children, dense, divided, ...rest }) {
       {children && children.length > 1 ? (
         children.map((c, index) => {
           return (
-            <>
-              <Item dense={dense} key={index}>
-                {c}
-              </Item>
+            <div key={index}>
+              <Item dense={dense}>{c}</Item>
               {index === divided - 1 && <Divider variant='middle' />}
-            </>
+            </div>
           )
         })
       ) : (
@@ -51,7 +49,11 @@ function Menu({ id, name, rootEl, children, dense, divided, ...rest }) {
         MenuListProps={{
           'aria-labelledby': anchorId,
         }}
-        PaperProps={{ sx: { minWidth: menuWidth } }}
+        PaperProps={{
+          sx: {
+            minWidth: { xs: '90vw', md: menuWidth },
+          },
+        }}
       >
         <ChildElm />
       </Root>

@@ -1,10 +1,10 @@
 import Typography from '@mui/material/Typography'
 import React from 'react'
 
-function Heading4({ children, ...rest }) {
+function Heading4({ text, children, ...rest }) {
   return (
     <Typography variant='h4' {...rest}>
-      {children}
+      {children || text}
     </Typography>
   )
 }

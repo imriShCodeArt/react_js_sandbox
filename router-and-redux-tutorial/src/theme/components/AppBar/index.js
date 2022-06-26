@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Box, IconButton, Typography } from '@mui/material'
-import {Menu as MenuIcon} from '@mui/icons-material'
+import { Menu as MenuIcon } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import Root from './Root'
 import Avatar from 'components/Avatar'
@@ -13,7 +13,7 @@ function AppBar({ primaryAction, ...rest }) {
   return (
     <Root>
       <Box>
-        <IconButton color='secondary' onClick={() => primaryAction}>
+        <IconButton color='secondary' onClick={() => primaryAction()}>
           <MenuIcon />
         </IconButton>
         <IconButton color='secondary' onClick={() => navigate('')}>
@@ -22,16 +22,13 @@ function AppBar({ primaryAction, ...rest }) {
           </Typography>
         </IconButton>
       </Box>
-      <Box alignItems={'center'} display=''>
-        <Menu dense rootEl={<Avatar />} divided={3}>
-          <Link text={'Account'} to={'account'} />
-          <Link text={'Preferences'} to={'preferences'} />
-          <Link text={'Settings'} to={'settings'} />
-          <Link text={'Profile'} to={'profile'} />
-          <Link text={'Logout'} to={'logout'} />
-
-        </Menu>
-      </Box>
+      <Avatar>
+        <Link text={'Account'} to={'account'} />
+        <Link text={'Preferences'} to={'preferences'} />
+        <Link text={'Settings'} to={'settings'} />
+        <Link text={'Profile'} to={'profile'} />
+        <Link text={'Logout'} to={'logout'} />
+      </Avatar>
     </Root>
   )
 }

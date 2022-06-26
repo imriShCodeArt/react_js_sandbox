@@ -1,10 +1,22 @@
 import React from 'react'
-import { Avatar as Root, Button } from '@mui/material'
-function Avatar({ children, text }) {
-  return (
+import { Avatar as Root, Box, Button } from '@mui/material'
+import Menu from 'components/Menu'
+
+function Avatar({ children, text, size }) {
+  const sizeSmall = size === 'small' && {
+    width:'1.50em', height:'1.50em'
+  }
+  const root = (
     <Button sx={{ minWidth: '0', padding: 0 }} size='small' color='secondary'>
-      <Root variant='rounded'>{children || text}</Root>
+      <Root sx={{...sizeSmall}} variant='rounded'>{text}</Root>
     </Button>
+  )
+  return (
+    <Box alignItems={'center'} display=''>
+      <Menu dense rootEl={root} divided={3}>
+        {children}
+      </Menu>
+    </Box>
   )
 }
 Avatar.defaultProps = {
