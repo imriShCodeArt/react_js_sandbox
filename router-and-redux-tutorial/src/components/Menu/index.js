@@ -4,7 +4,7 @@ import { Menu as Root, Box, Divider } from '@mui/material'
 import MenuButton from '../Button/MenuButton'
 import Item from './components/Item'
 
-function Menu({ id, name, rootEl, children, dense, divided, ...rest }) {
+function Menu({ id, name, rootEl, children, dense, divided, grow, ...rest }) {
   const anchorId = name ? `${name}_button` : 'basic-button'
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [menuWidth, setMenuWidth] = React.useState(0)
@@ -51,7 +51,7 @@ function Menu({ id, name, rootEl, children, dense, divided, ...rest }) {
         }}
         PaperProps={{
           sx: {
-            minWidth: { xs: '90vw', md: menuWidth },
+            minWidth: { xs: grow && '90vw', md: menuWidth },
           },
         }}
       >

@@ -2,7 +2,7 @@ import React from 'react'
 import { Avatar as Root, Box, Button } from '@mui/material'
 import Menu from 'components/Menu'
 
-function Avatar({ children, text, size }) {
+function Avatar({ children, text, size, menuGrow }) {
   const sizeSmall = size === 'small' && {
     width:'1.50em', height:'1.50em'
   }
@@ -13,7 +13,7 @@ function Avatar({ children, text, size }) {
   )
   return (
     <Box alignItems={'center'} display=''>
-      <Menu dense rootEl={root} divided={3}>
+      <Menu grow={menuGrow} dense rootEl={root} divided={3}>
         {children}
       </Menu>
     </Box>

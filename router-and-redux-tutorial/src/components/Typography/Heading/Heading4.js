@@ -3,7 +3,7 @@ import React from 'react'
 
 function Heading4({ text, children, ...rest }) {
   return (
-    <Typography variant='h4' {...rest}>
+    <Typography component={'h4'} variant='h4' {...rest}>
       {children || text}
     </Typography>
   )

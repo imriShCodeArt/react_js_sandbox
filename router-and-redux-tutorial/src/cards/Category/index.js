@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material'
+import { Box, Divider, Grid } from '@mui/material'
 import React from 'react'
 import PostWidget from '../Post'
 
@@ -7,18 +7,26 @@ import Heading3 from 'components/Typography/Heading/Heading3'
 function Category({ posts, name }) {
   const CategoryPosts = () => {
     return posts.map((p) => (
-      <Grid key={p.id} item xs={6}>
-        <PostWidget key={p.id} {...p} />
+      <Grid key={p.id} item xs={6} md={4} xl={3}>
+        <PostWidget
+          key={p.id}
+          {...p}
+          categories={[{ name: 'Data Display', slug: 'data-display' }]}
+        />
       </Grid>
     ))
   }
   return (
-    <Grid p={3} spacing={3} item xs={12} lg={12} container>
-      <Grid item xs={12}>
+    <>
+      <Box>
         <Heading3 text={name} />
-      </Grid>
-      <CategoryPosts />
-    </Grid>
+        <Divider sx={{ my: '1em', borderBottom: 'none' }} />
+        <Grid container spacing={2}>
+          <CategoryPosts />
+        </Grid>
+      </Box>
+      <Divider sx={{ my: '2em' }} variant='inset' />
+    </>
   )
 }
 Category.defaultProps = {
@@ -29,7 +37,7 @@ Category.defaultProps = {
       title: 'My First Post',
       date: new Date().toUTCString(),
       authors: [1],
-      categories: [0],
+      categories: [{ name: 'Data Display', slug: 'data-display' }],
     },
   ],
 }

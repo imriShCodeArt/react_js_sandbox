@@ -5,7 +5,6 @@ import { Menu as MenuIcon } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import Root from './Root'
 import Avatar from 'components/Avatar'
-import Menu from 'components/Menu'
 import Link from 'components/Link'
 
 function AppBar({ primaryAction, ...rest }) {
@@ -22,7 +21,7 @@ function AppBar({ primaryAction, ...rest }) {
           </Typography>
         </IconButton>
       </Box>
-      <Avatar>
+      <Avatar menuGrow >
         <Link text={'Account'} to={'account'} />
         <Link text={'Preferences'} to={'preferences'} />
         <Link text={'Settings'} to={'settings'} />

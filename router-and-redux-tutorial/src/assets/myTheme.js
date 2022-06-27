@@ -5,7 +5,7 @@ export default () => {
   return createTheme({
     palette: {
       primary: { main: orange['A700'], contrastText:'#FFF' },
-      secondary: { main: '#FFF', contrastText:'#000' },
+      secondary: { main: '#FFF', contrastText:orange['A700'] },
     },
     typography: {
       fontWeightBold: 900,
