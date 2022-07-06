@@ -14,10 +14,10 @@ import ButtonBase from 'components/Button/ButtonBase'
 
 import { slugString, dateString } from 'assets/utils'
 
-function Post({ title, slug, date, authors, categories }) {
+function Post({ title, slug, date, authors, categories, short }) {
+  const contentStr = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam commodi odit quasi placeat nihil enim maxime porro aperiam, et dignissimos, nostrum possimus laboriosam vel magnam illum harum doloremque obcaecati consectetur facere sapiente.'
   const navigate = useNavigate()
   const theme = useTheme()
-
   const CategoryButton = ({ name, href }) => (
     <ButtonBase sx={{ textAlign: 'center' }}>
       <Link onClick={() => navigate(`/category/${href}`)}>{name}</Link>
@@ -43,13 +43,10 @@ function Post({ title, slug, date, authors, categories }) {
           </React.Fragment>
         ))}
       </Stack>
-      <CardActionArea onClick={() => navigate(`/entry/${slug}`)}>
+      <CardActionArea onClick={() => navigate(`/entry/${slugString(slug)}`)}>
         <CardContent>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
-            commodi odit quasi placeat nihil enim maxime porro aperiam, et
-            dignissimos, nostrum possimus laboriosam vel magnam illum harum
-            doloremque obcaecati consectetur facere sapiente.
+            {short ? contentStr.split(' ').map((w, index) => index < 20 ? w : '').join(' ') : contentStr}
           </Typography>
         </CardContent>
       </CardActionArea>

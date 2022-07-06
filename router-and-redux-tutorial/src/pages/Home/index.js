@@ -1,8 +1,12 @@
+import { Box } from '@mui/material'
 import React from 'react'
+import PostSliderHorizontal from 'cards/PostSliderHorizontal'
 
 function Home() {
   return (
-    <div>Home</div>
+    <Box>
+      <PostSliderHorizontal />
+    </Box>
   )
 }
 
