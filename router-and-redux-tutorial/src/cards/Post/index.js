@@ -1,99 +1,60 @@
 import {
-  ButtonGroup,
   Card,
-  CardActions,
+  CardActionArea,
   CardContent,
-  CardHeader,
-  IconButton,
   Typography,
+  Link,
+  Stack,
+  useTheme,
 } from '@mui/material'
 import React from 'react'
-
-import Avatar from 'components/Avatar'
-import Link from 'components/Link'
-
-import { MoreHoriz, Twitter, Add } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 
-function Post({
-  id,
-  slug,
-  title,
-  date,
-  authors,
-  categories,
-  content,
-  ...rest
-}) {
+import ButtonBase from 'components/Button/ButtonBase'
+
+import { slugString, dateString } from 'assets/utils'
+
+function Post({ title, slug, date, authors, categories }) {
   const navigate = useNavigate()
-  const MyAvatar = () => (
-    <Avatar>
-      <ButtonGroup>
-        <IconButton title='learn more'>
-          <MoreHoriz />
-        </IconButton>
-        <IconButton title='folllow on twitter'>
-          <Twitter />
-        </IconButton>
-        <IconButton title='add to favorites'>
-          <Add />
-        </IconButton>
-      </ButtonGroup>
-    </Avatar>
+  const theme = useTheme()
+
+  const CategoryButton = ({ name, href }) => (
+    <ButtonBase sx={{ textAlign: 'center' }}>
+      <Link onClick={() => navigate(`/category/${href}`)}>{name}</Link>
+    </ButtonBase>
   )
   return (
-    <Card elevation={3}>
-      <CardHeader
-        sx={{
-          transition: '.3s ease-in-out all',
-          '&:hover': { cursor: 'pointer', bgcolor: '#f7f7f7' },
-        }}
-        titleTypographyProps={{
-          sx: {
-            '&:hover': { cursor: 'pointer' },
-          },
-          onClick: () => navigate(`entry/${slug}`),
-        }}
-        subheaderTypographyProps={{
-          sx: {
-            '&:hover': { cursor: 'pointer' },
-          },
-          onClick: () => navigate(`entry/${slug}`),
-        }}
-        title={title}
-        subheader={date}
-        avatar={<MyAvatar />}
-      />
-      <CardContent
-        sx={{
-          transition: '.3s ease-in-out all',
-          '&:hover': { cursor: 'pointer', bgcolor: '#f7f7f7' },
-        }}
-        onClick={() => navigate(`entry/${slug}`)}
-      >
-        <Typography>{content.slice(0, 120)}...</Typography>
-      </CardContent>
-      <CardActions sx={{ p: 0 }}>
-        <Link color='info' to={`entry/${slug}`} text={'Read more'} />
-        <Link
-          color='info'
-          to={`category/${categories[0].slug}`}
-          text={`More from ${categories[0].name}`}
-        />
-      </CardActions>
+    <Card>
+      <ButtonBase
+      //  onClick={() => navigate(`/entry/${slugString(slug)}`)}
+       >
+        <Stack px={'1em'} pt={'.95em'} pb={'.25em'}>
+          <Typography variant='h5'>{title}</Typography>
+          <Typography variant='subtitle2'>{dateString(date)}</Typography>
+        </Stack>
+      </ButtonBase>
+      <Stack direction={'row'} width={'50%'}>
+        {['Science', 'Nature', 'Space'].map((i, index) => (
+          <React.Fragment key={index}>
+            <CategoryButton name={i} href={i.toLowerCase()} />
+            <Typography variant='body2' color={theme.palette.primary.light}>
+              |
+            </Typography>
+          </React.Fragment>
+        ))}
+      </Stack>
+      <CardActionArea onClick={() => navigate(`/entry/${slug}`)}>
+        <CardContent>
+          <Typography>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
+            commodi odit quasi placeat nihil enim maxime porro aperiam, et
+            dignissimos, nostrum possimus laboriosam vel magnam illum harum
+            doloremque obcaecati consectetur facere sapiente.
+          </Typography>
+        </CardContent>
+      </CardActionArea>
     </Card>
   )
-}
-
-Post.defaultProps = {
-  id: 1,
-  slug: 'my-fisrt-post',
-  title: 'My First Post',
-  date: new Date().toUTCString(),
-  authors: [1],
-  categories: [{ name: 'Data Display', slug: 'data-display' }],
-  content:
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit id est qui voluptatibus blanditiis optio accusamus distinctio eveniet! Atque maxime, dolorum perferendis ullam labore aliquid ipsam velit ex iure ipsum similique nemo dolorem rerum modi illum a architecto assumenda consequuntur suscipit odio tenetur. Impedit iure aperiam magni laudantium aut suscipit.',
 }
 
 export default Post
