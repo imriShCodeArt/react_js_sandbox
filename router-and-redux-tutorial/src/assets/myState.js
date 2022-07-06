@@ -1,12 +1,15 @@
-export default {
+import { CATEGORIES, CATEGORIES_FEATURED_IMAGE } from 'vars'
+import { capitalize, lowerCase } from './utils'
+
+export const myState = {
   posts: [
     {
       id: 1,
-      slug: 'autocomplete',
-      title: 'Autocomplete',
+      slug: 'the-sun',
+      title: 'The Sun',
       date: new Date().toUTCString(),
       authors: [1],
-      categories: [0],
+      categories: [CATEGORIES[1], CATEGORIES[3]],
     },
     {
       id: 2,
@@ -14,7 +17,7 @@ export default {
       title: 'Button',
       date: new Date().toUTCString(),
       authors: [1],
-      categories: [0],
+      categories: [CATEGORIES[1], CATEGORIES[2]],
     },
     {
       id: 3,
@@ -22,7 +25,7 @@ export default {
       title: 'Button group',
       date: new Date().toUTCString(),
       authors: [1],
-      categories: [0],
+      categories: [CATEGORIES[2], CATEGORIES[3]],
     },
     {
       id: 4,
@@ -30,7 +33,7 @@ export default {
       title: 'Checkbox',
       date: new Date().toUTCString(),
       authors: [1],
-      categories: [0],
+      categories: [CATEGORIES[1]],
     },
     {
       id: 5,
@@ -38,7 +41,7 @@ export default {
       title: 'Floating action button',
       date: new Date().toUTCString(),
       authors: [1],
-      categories: [0],
+      categories: [CATEGORIES[4], CATEGORIES[3]],
     },
     {
       id: 6,
@@ -46,7 +49,7 @@ export default {
       title: 'Radio button',
       date: new Date().toUTCString(),
       authors: [1],
-      categories: [0],
+      categories: [CATEGORIES[5], CATEGORIES[2]],
     },
     {
       id: 7,
@@ -54,7 +57,7 @@ export default {
       title: 'Rating',
       date: new Date().toUTCString(),
       authors: [1],
-      categories: [0],
+      categories: [CATEGORIES[4], CATEGORIES[5], CATEGORIES[1]],
     },
     {
       id: 8,
@@ -62,7 +65,7 @@ export default {
       title: 'Select',
       date: new Date().toUTCString(),
       authors: [1],
-      categories: [0],
+      categories: [CATEGORIES[4]],
     },
     {
       id: 9,
@@ -70,7 +73,7 @@ export default {
       title: 'Slider',
       date: new Date().toUTCString(),
       authors: [1],
-      categories: [0],
+      categories: [CATEGORIES[3], CATEGORIES[4]],
     },
     {
       id: 10,
@@ -78,7 +81,7 @@ export default {
       title: 'Switch',
       date: new Date().toUTCString(),
       authors: [1],
-      categories: [0],
+      categories: [CATEGORIES[5]],
     },
     {
       id: 11,
@@ -86,7 +89,7 @@ export default {
       title: 'Text field',
       date: new Date().toUTCString(),
       authors: [1],
-      categories: [0],
+      categories: [CATEGORIES[2]],
     },
     {
       id: 12,
@@ -94,7 +97,7 @@ export default {
       title: 'Transfer list',
       date: new Date().toUTCString(),
       authors: [1],
-      categories: [0],
+      categories: [CATEGORIES[4]],
     },
     {
       id: 13,
@@ -102,7 +105,7 @@ export default {
       title: 'Toggle button',
       date: new Date().toUTCString(),
       authors: [1],
-      categories: [0],
+      categories: [CATEGORIES[2], CATEGORIES[5]],
     },
     {
       id: 14,
@@ -110,7 +113,7 @@ export default {
       title: 'Avatar',
       date: 'Sun, 26 Jun 2022 06:26:28 GMT',
       authors: [1],
-      categories: [1],
+      categories: [CATEGORIES[3], CATEGORIES[4]],
     },
     {
       id: 15,
@@ -118,7 +121,7 @@ export default {
       title: 'Badge',
       date: 'Sun, 26 Jun 2022 06:26:28 GMT',
       authors: [1],
-      categories: [1],
+      categories: [CATEGORIES[2], CATEGORIES[1]],
     },
     {
       id: 16,
@@ -126,7 +129,7 @@ export default {
       title: 'Chip',
       date: 'Sun, 26 Jun 2022 06:26:28 GMT',
       authors: [1],
-      categories: [1],
+      categories: [CATEGORIES[1], CATEGORIES[4]],
     },
     {
       id: 17,
@@ -134,7 +137,7 @@ export default {
       title: 'Divider',
       date: 'Sun, 26 Jun 2022 06:26:28 GMT',
       authors: [1],
-      categories: [1],
+      categories: [CATEGORIES[2]],
     },
     {
       id: 18,
@@ -142,7 +145,7 @@ export default {
       title: 'Icons',
       date: 'Sun, 26 Jun 2022 06:26:28 GMT',
       authors: [1],
-      categories: [1],
+      categories: [CATEGORIES[2]],
     },
     {
       id: 19,
@@ -150,7 +153,7 @@ export default {
       title: 'Material Icons',
       date: 'Sun, 26 Jun 2022 06:26:28 GMT',
       authors: [1],
-      categories: [1],
+      categories: [CATEGORIES[2]],
     },
     {
       id: 20,
@@ -158,7 +161,7 @@ export default {
       title: 'List',
       date: 'Sun, 26 Jun 2022 06:26:28 GMT',
       authors: [1],
-      categories: [1],
+      categories: [CATEGORIES[2]],
     },
     {
       id: 21,
@@ -465,43 +468,12 @@ export default {
       categories: [6],
     },
   ],
-  categories: [
-    {
-      id: 0,
-      name: 'Inputs',
-      slug: 'inputs',
-    },
-    {
-      id: 1,
-      name: 'Data Display',
-      slug: 'data-display',
-    },
-    {
-      id: 2,
-      name: 'Feedback',
-      slug: 'feedback',
-    },
-    {
-      id: 3,
-      name: 'Surfaces',
-      slug: 'surfaces',
-    },
-    {
-      id: 4,
-      name: 'Navigation',
-      slug: 'navigation',
-    },
-    {
-      id: 5,
-      name: 'Layout',
-      slug: 'layout',
-    },
-    {
-      id: 6,
-      name: 'Utils',
-      slug: 'utils',
-    },
-  ],
+  categories: CATEGORIES.map((i, index) => ({
+    id: index,
+    name: capitalize(i),
+    slug: lowerCase(i),
+    img: CATEGORIES_FEATURED_IMAGE[index]
+  })),
   authors: [
     {
       id: 1,
@@ -520,3 +492,5 @@ export default {
     },
   ],
 }
+
+export default myState

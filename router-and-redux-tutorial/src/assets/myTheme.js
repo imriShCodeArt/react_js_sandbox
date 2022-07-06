@@ -4,8 +4,13 @@ import { createTheme } from '@mui/material/styles'
 export default () => {
   return createTheme({
     palette: {
-      primary: { main: orange['A700'], contrastText:'#FFF' },
-      secondary: { main: '#FFF', contrastText:orange['A700'] },
+      primary: {
+        main: orange['A700'],
+        light: orange['A200'],
+        dark: orange['900'],
+        contrastText: '#FFF',
+      },
+      secondary: { main: '#FFF', contrastText: orange['A700'] },
     },
     typography: {
       fontWeightBold: 900,
