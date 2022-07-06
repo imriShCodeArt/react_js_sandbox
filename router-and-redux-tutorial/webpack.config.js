@@ -16,6 +16,7 @@ module.exports = {
       theme: path.resolve(__dirname, './src/theme'),
       features: path.resolve(__dirname, './src/features'),
       assets: path.resolve(__dirname, './src/assets'),
+      vars: path.resolve(__dirname, './vars'),
     },
   },
 

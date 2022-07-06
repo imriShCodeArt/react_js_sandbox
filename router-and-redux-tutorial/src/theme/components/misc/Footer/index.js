@@ -2,7 +2,7 @@ import { Grid, List, ListItem, ListItemText, useTheme } from '@mui/material'
 import React from 'react'
 
 import Heading5 from 'components/Typography/Heading/Heading5'
-import PostWidget from 'cards/Post'
+
 
 import { useSelector } from 'react-redux'
 function Footer({}) {

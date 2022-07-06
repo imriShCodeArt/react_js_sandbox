@@ -7,10 +7,10 @@ import Root from './Root'
 import Avatar from 'components/Avatar'
 import Link from 'components/Link'
 
-function AppBar({ primaryAction, ...rest }) {
+function AppBar({ primaryAction, drawerOpen, ...rest }) {
   const navigate = useNavigate()
   return (
-    <Root>
+    <Root drawerOpen={drawerOpen} >
       <Box>
         <IconButton color='secondary' onClick={() => primaryAction()}>
           <MenuIcon />
@@ -21,7 +21,7 @@ function AppBar({ primaryAction, ...rest }) {
           </Typography>
         </IconButton>
       </Box>
-      <Avatar menuGrow >
+      <Avatar menuGrow>
         <Link text={'Account'} to={'account'} />
         <Link text={'Preferences'} to={'preferences'} />
         <Link text={'Settings'} to={'settings'} />

@@ -6,13 +6,13 @@ export const postsSlice = createSlice({
   initialState: myState.posts,
   reducers: {
     addPost: (state, action) => {
-        const tmpPost = action.payload
+      const tmpPost = action.payload
       state.posts += tmpPost
     },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { addPost, } = postsSlice.actions
+export const { addPost } = postsSlice.actions
 
 export default postsSlice.reducer
