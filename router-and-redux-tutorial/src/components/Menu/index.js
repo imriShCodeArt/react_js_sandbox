@@ -54,6 +54,7 @@ function Menu({ id, name, rootEl, children, dense, divided, grow, ...rest }) {
             minWidth: { xs: grow && '90vw', md: menuWidth },
           },
         }}
+        disableScrollLock
       >
         <ChildElm />
       </Root>

@@ -2,13 +2,13 @@ import React from 'react'
 import { Avatar as Root, Box, Button } from '@mui/material'
 import Menu from 'components/Menu'
 
-function Avatar({ children, text, size, menuGrow }) {
+function Avatar({ children, text, size, menuGrow, round }) {
   const sizeSmall = size === 'small' && {
     width:'1.50em', height:'1.50em'
   }
   const root = (
     <Button sx={{ minWidth: '0', padding: 0 }} size='small' color='secondary'>
-      <Root sx={{...sizeSmall}} variant='rounded'>{text}</Root>
+      <Root sx={{...sizeSmall}} variant={round? 'circular':'rounded'}>{text}</Root>
     </Button>
   )
   return (

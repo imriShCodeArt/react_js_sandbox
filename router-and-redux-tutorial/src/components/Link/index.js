@@ -4,9 +4,9 @@ import TextButton from 'components/Button/TextButton'
 
 function Link({ to, text, color, children }) {
   const navigate = useNavigate()
-  
+
   return (
-    <TextButton  color={color} action={() => navigate(`${to}`)}>
+    <TextButton color={color} action={() => navigate(`${to}`)}>
       {children || text}
     </TextButton>
   )

@@ -1,11 +1,11 @@
 import React from 'react'
 import { Button as Root } from '@mui/material'
-function Button({ text, action, color, children, contrast, small, ...rest }) {
+function ContrastButton({ text, action, color, children, small, ...rest }) {
   return (
     <Root
       variant='contained'
       onClick={action}
-      color={contrast ? 'secondary' : color}
+      color={'secondary'}
       {...rest}
     >
       {children || text || 'Click'}
@@ -13,4 +13,4 @@ function Button({ text, action, color, children, contrast, small, ...rest }) {
   )
 }
 
-export default Button
+export default ContrastButton
