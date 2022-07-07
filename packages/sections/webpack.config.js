@@ -1,23 +1,18 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
-const path = require('path')
 const deps = require("./package.json").dependencies;
 module.exports = {
   output: {
-    publicPath: "http://localhost:4020/",
+    publicPath: "http://localhost:4030/",
   },
 
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
-    alias:{
-      assets: path.resolve(__dirname, './src/assets'),
-      cards: path.resolve(__dirname, './shared'),
-    }
   },
 
   devServer: {
-    port: 4020,
+    port: 4030,
     historyApiFallback: true,
   },
 
@@ -46,17 +41,10 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "cards",
+      name: "sections",
       filename: "remoteEntry.js",
-      remotes: {
-        components: 'components@http://localhost:4010/remoteEntry.js',
-      },
-      exposes: {
-        './CategoriesSidebar': './shared/CategoriesSidebar',
-        './Post': './shared/Post',
-        './PostSliderHorizontal': './shared/PostSliderHorizontal',
-        './PostsSidebar': './shared/PostsSidebar',
-      },
+      remotes: {},
+      exposes: {},
       shared: {
         ...deps,
         react: {
@@ -66,10 +54,6 @@ module.exports = {
         "react-dom": {
           singleton: true,
           requiredVersion: deps["react-dom"],
-        },
-        '@emotion/react': {
-          singleton: true,
-          requiredVersion: deps['@emotion/react'],
         },
       },
     }),

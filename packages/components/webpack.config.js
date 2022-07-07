@@ -10,7 +10,7 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
     alias: {
-      components: path.resolve(__dirname, './src/'),
+      components: path.resolve(__dirname, './shared/'),
     },
   },
 
@@ -48,12 +48,12 @@ module.exports = {
       filename: 'remoteEntry.js',
       remotes: {},
       exposes: {
-        './Avatar': './src/Avatar',
-        './Breadcrumbs': './src/Breadcrumbs',
-        './ButtonBase': './src/Button/ButtonBase',
-        './Link': './src/Link',
-        './Heading5': './src/Typography/Heading/Heading5',
-        './Menu': './src/Menu',
+        './Avatar': './shared/Avatar',
+        './Breadcrumbs': './shared/Breadcrumbs',
+        './ButtonBase': './shared/Button/ButtonBase',
+        './Link': './shared/Link',
+        './Heading5': './shared/Typography/Heading/Heading5',
+        './Menu': './shared/Menu',
       },
       shared: {
         ...deps,
