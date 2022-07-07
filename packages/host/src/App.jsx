@@ -1,14 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter } from 'react-router-dom'
+import ReactDOM from "react-dom/client";
 import { Provider } from 'react-redux'
 
 import "./index.css";
-const Avatar = React.lazy(() => import("components/Avatar"));
 
 import Theme from './theme'
 import { store } from "./store";
 
+import { BrowserRouter } from 'react-router-dom'
 const App = () => (
   <BrowserRouter>
     <Provider store={store}>
@@ -16,4 +15,5 @@ const App = () => (
     </Provider>
   </BrowserRouter >
 );
-ReactDOM.render(<App />, document.getElementById("app"));
+const root = ReactDOM.createRoot(document.getElementById("app"));
+root.render(<App />);

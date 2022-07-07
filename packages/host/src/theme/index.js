@@ -16,8 +16,9 @@ import Contact from '../pages/Contact'
 import Page404 from '../pages/Page404'
 import Category from './components/layout/Category'
 import { useSelector } from 'react-redux'
-import PostsSidebar from 'cards/PostsSidebar'
-import CategoriesSidebar from 'cards/CategoriesSidebar'
+
+const PostsSidebar = React.lazy(() => import('cards/PostsSidebar'))
+const CategoriesSidebar = React.lazy(() => import('cards/CategoriesSidebar'))
 
 function Theme({}) {
   const location = useLocation()
@@ -28,7 +29,7 @@ function Theme({}) {
   const updatePageTitle = () =>
     setPageTitle(location.length === 1 && location[0])
 
-  const categories = useSelector(state => state.categories)
+  const categories = useSelector((state) => state.categories)
 
   // POST META:
   const currentPost = useSelector((state) => state.posts).filter(
@@ -68,17 +69,39 @@ function Theme({}) {
           path='/*'
           element={<Page title={pageTitle} highHeader={highHeader} />}
         >
-        <Route path=':pages' element={<Page404 />} />
+          <Route path=':pages' element={<Page404 />} />
           <Route index element={<Home />} />
           <Route path={'about'} element={<About />} />
           <Route path={'contact'} element={<Contact />} />
         </Route>
         {/*--------------------- Posts layout: ---------------------*/}
         <Route path='entry' element={<Post {...currentPost[0]} />}>
-          <Route path=':posts' element={<Sidebar element={<PostsSidebar />} />} />
+          <Route
+            path=':posts'
+            element={
+              <Sidebar
+                element={
+                  <React.Suspense fallback={<div />}>
+                    <PostsSidebar />
+                  </React.Suspense>
+                }
+              />
+            }
+          />
         </Route>
         <Route path='category' element={<Category title={location[1]} />}>
-          <Route path=':categories' element={<Sidebar element={<CategoriesSidebar items={categories} />} />} />
+          <Route
+            path=':categories'
+            element={
+              <Sidebar
+                element={
+                  <React.Suspense fallback={<div />}>
+                    <CategoriesSidebar items={categories} />
+                  </React.Suspense>
+                }
+              />
+            }
+          />
         </Route>
       </Routes>
 

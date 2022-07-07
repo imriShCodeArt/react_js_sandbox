@@ -23,9 +23,7 @@ function Page({ children, title, highHeader }) {
             transition: 'height .3s ease-in-out',
           }}
         />
-        <CardContent>
-          {children || <Outlet />}
-        </CardContent>
+        <CardContent>{children || <Outlet />}</CardContent>
       </Box>
     </Card>
   )

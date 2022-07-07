@@ -1,25 +1,22 @@
-const HtmlWebPackPlugin = require('html-webpack-plugin')
-const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+
 const path = require('path')
-const deps = require('./package.json').dependencies
+const deps = require("./package.json").dependencies;
 module.exports = {
   output: {
-    publicPath: 'http://localhost:8080/',
+    publicPath: "http://localhost:4020/",
   },
 
   resolve: {
-    extensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
-    alias: {
-      pages: path.resolve(__dirname, './src/pages'),
-      theme: path.resolve(__dirname, './src/theme'),
-      features: path.resolve(__dirname, './src/features'),
+    extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
+    alias:{
       assets: path.resolve(__dirname, './src/assets'),
-      vars: path.resolve(__dirname, './vars'),
-    },
+    }
   },
 
   devServer: {
-    port: 8080,
+    port: 4020,
     historyApiFallback: true,
   },
 
@@ -27,20 +24,20 @@ module.exports = {
     rules: [
       {
         test: /\.m?js/,
-        type: 'javascript/auto',
+        type: "javascript/auto",
         resolve: {
           fullySpecified: false,
         },
       },
       {
         test: /\.(css|s[ac]ss)$/i,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        use: ["style-loader", "css-loader", "postcss-loader"],
       },
       {
         test: /\.(ts|tsx|js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
         },
       },
     ],
@@ -48,22 +45,26 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-      name: 'host',
-      filename: 'remoteEntry.js',
+      name: "cards",
+      filename: "remoteEntry.js",
       remotes: {
         components: 'components@http://localhost:4010/remoteEntry.js',
-        cards: 'cards@http://localhost:4020/remoteEntry.js',
       },
-      exposes: {},
+      exposes: {
+        './CategoriesSidebar': './src/CategoriesSidebar',
+        './Post': './src/Post',
+        './PostSliderHorizontal': './src/PostSliderHorizontal',
+        './PostsSidebar': './src/PostsSidebar',
+      },
       shared: {
         ...deps,
         react: {
           singleton: true,
           requiredVersion: deps.react,
         },
-        'react-dom': {
+        "react-dom": {
           singleton: true,
-          requiredVersion: deps['react-dom'],
+          requiredVersion: deps["react-dom"],
         },
         '@emotion/react': {
           singleton: true,
@@ -72,7 +73,7 @@ module.exports = {
       },
     }),
     new HtmlWebPackPlugin({
-      template: './src/index.html',
+      template: "./src/index.html",
     }),
   ],
-}
+};

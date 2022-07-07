@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 
 import Heading5 from 'components/Typography/Heading/Heading5'
 
@@ -11,4 +11,5 @@ const App = () => (
   </div>
 )
 
-ReactDOM.render(<App />, document.getElementById('app'))
+const root = ReactDOM.createRoot(document.getElementById('app'))
+root.render(<App />)

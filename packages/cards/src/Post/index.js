@@ -14,10 +14,10 @@ const ButtonBase = React.lazy(() => import('components/ButtonBase'))
 
 import { slugString, dateString } from 'assets/utils'
 
-function Post({ title, slug, date, authors, categories, short }) {
+function Post({ title, slug, date, authors, categories, short, nav }) {
   const contentStr =
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam commodi odit quasi placeat nihil enim maxime porro aperiam, et dignissimos, nostrum possimus laboriosam vel magnam illum harum doloremque obcaecati consectetur facere sapiente.'
-  const navigate = useNavigate()
+  const navigate = nav || useNavigate()
   const theme = useTheme()
   const CategoryButton = ({ name, href }) => (
     <React.Suspense fallback={<div />}>

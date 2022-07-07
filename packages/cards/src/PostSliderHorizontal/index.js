@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { Box, Fab } from '@mui/material'
-import Post from 'cards/Post'
+import Post from '../Post'
 
 import {
   ChevronLeft as LeftIcon,
   ChevronRight as RightIcon,
 } from '@mui/icons-material'
 
-function PostSliderHorizontal({ posts }) {
+function PostSliderHorizontal({ posts, nav }) {
+  console.log(nav)
   const globalElementHeight = '300px'
   const [moveHoriz, setMoveHoriz] = useState(0)
 
@@ -43,7 +44,7 @@ function PostSliderHorizontal({ posts }) {
         key={index}
         sx={{ p: '1em' }}
       >
-        <Post short {...p} />
+        <Post nav={nav} short {...p} />
       </Box>
     ))
 

@@ -9,13 +9,15 @@ import {
   useTheme,
 } from '@mui/material'
 import { Outlet } from 'react-router-dom'
-import Post from 'cards/Post'
+
+const Post = React.lazy(() => import('cards/Post'))
+
 import { useSelector } from 'react-redux'
 
 function Category({ children, title }) {
   const { categories, posts } = useSelector((state) => state)
   const theme = useTheme()
-  
+
   const currentCategory = categories.filter((i) => i.slug === title)
   const currentPosts = posts.filter((p) => {
     let hasMatch = 0
@@ -62,11 +64,17 @@ function Category({ children, title }) {
               spacing={theme.spacing(1)}
               py={theme.spacing(2)}
             >
-              {currentPosts.length > 0 ? currentPosts.map((p, index) => (
-                <Grid key={index} item xs={4}>
-                  <Post {...p} />
-                </Grid>
-              )) : <Typography>no posts in this category...</Typography> }
+              {currentPosts.length > 0 ? (
+                currentPosts.map((p, index) => (
+                  <Grid key={index} item xs={4}>
+                    <React.Suspense fallback={<div />}>
+                      <Post {...p} />
+                    </React.Suspense>
+                  </Grid>
+                ))
+              ) : (
+                <Typography>no posts in this category...</Typography>
+              )}
             </Grid>
             {children || <Outlet />}
           </Grid>
