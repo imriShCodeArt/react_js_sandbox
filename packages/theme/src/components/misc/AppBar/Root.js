@@ -1,4 +1,5 @@
-import { AppBar, Box } from '@mui/material'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
 import React from 'react'
 
 function Root({ children, width, drawerOpen, ...rest }) {

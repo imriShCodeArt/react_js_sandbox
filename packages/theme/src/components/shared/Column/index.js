@@ -1,8 +1,11 @@
 import React from 'react'
+import Grid from '@mui/material/Grid'
 
-function Column() {
+function Column({ children, ...props }) {
   return (
-    <div>Column</div>
+    <Grid className='Column' item {...props}  >
+      {children}
+    </Grid>
   )
 }
 

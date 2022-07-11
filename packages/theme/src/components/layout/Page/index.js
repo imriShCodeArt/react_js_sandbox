@@ -1,9 +1,25 @@
-import React from 'react'
-import { Box, Card, CardContent, CardHeader } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import CardHeader from '@mui/material/CardHeader'
 import { Outlet } from 'react-router-dom'
-function Page({ children, title, highHeader }) {
+
+function Page({ children, location }) {
+  const [pageTitle, setPageTitle] = useState()
+  const updatePageTitle = () =>
+    setPageTitle(location.length === 1 && location[0])
+
+  const [highHeader, setHighHeader] = useState(location.length === 0 && true)
+  const updateHeader = () => setHighHeader(location.length === 0 ? true : false)
+
+  // LOCATION EFFECTS:
+  useEffect(() => {
+    updatePageTitle()
+    updateHeader()
+  }, [location])
+
   const imgUrl = () => {
-    switch (title) {
+    switch (pageTitle) {
       case false:
         return 'https://i.etsystatic.com/9947821/r/il/6e6dd1/2044263026/il_fullxfull.2044263026_j126.jpg'
       case 'contact':
@@ -14,28 +30,31 @@ function Page({ children, title, highHeader }) {
   }
 
   return (
-    <Card>
-      <Box>
-        <CardHeader
-          titleTypographyProps={{ textTransform: 'capitalize', variant: 'h1' }}
-          title={title || 'Home'}
-          subheader={'Page Layout'}
-          subheaderTypographyProps={{
-            variant: 'h2',
-          }}
-          sx={{
-            backgroundImage: `linear-gradient(rgba(251,251,251,0.5), rgba(251,251,251,0.3)), url(${imgUrl()})`,
-            backgroundPosition: 'center',
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            height: highHeader ? '30em' : '13em',
-            transition: 'height .3s ease-in-out',
-          }}
-        />
-        <CardContent className='page-container' sx={{ p: 0 }}>
-          {children || <Outlet />}
-        </CardContent>
-      </Box>
+    <Card component={'article'}>
+      <CardHeader
+        component='header'
+        titleTypographyProps={{ textTransform: 'capitalize', variant: 'h1' }}
+        title={pageTitle || 'Home'}
+        subheader={'Page Layout'}
+        subheaderTypographyProps={{
+          variant: 'h2',
+        }}
+        sx={{
+          backgroundImage: `linear-gradient(rgba(251,251,251,0.5), rgba(251,251,251,0.3)), url(${imgUrl()})`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          height: highHeader ? '30em' : '13em',
+          transition: 'height .3s ease-in-out',
+        }}
+      />
+      <CardContent
+        component={'main'}
+        className='Page_Content'
+        sx={{ p: '0', pb:'4em!important', pt:'4em' }}
+      >
+        {children || <Outlet />}
+      </CardContent>
     </Card>
   )
 }

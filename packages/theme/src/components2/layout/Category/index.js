@@ -10,15 +10,15 @@ import {
 } from '@mui/material'
 import { Outlet } from 'react-router-dom'
 
-const Post = React.lazy(() => import('cards/Post'))
+const Post = () => {
+  return <Box>POST</Box>
+}
 
-import { useSelector } from 'react-redux'
-
-function Category({ children, title, posts, categories }) {
+function Category({ children, title, categories = [{}], posts = [{}] }) {
   const theme = useTheme()
 
-  const currentCategory = categories && categories.filter((i) => i.slug === title)
-  const currentPosts = posts && categories && posts.filter((p) => {
+  const currentCategory = categories.filter((i) => i.slug === title)
+  const currentPosts = posts.filter((p) => {
     let hasMatch = 0
     p.categories.map((c) => {
       return c.toString().toLowerCase() === currentCategory[0].slug
@@ -27,7 +27,7 @@ function Category({ children, title, posts, categories }) {
     })
     return hasMatch > 0 && p
   })
-  const imgUrl = currentCategory && currentCategory[0].img
+  const imgUrl = currentCategory[0].img
   return (
     <Card>
       <Box>
@@ -63,12 +63,10 @@ function Category({ children, title, posts, categories }) {
               spacing={theme.spacing(1)}
               py={theme.spacing(2)}
             >
-              {currentPosts && currentPosts.length > 0 ? (
+              {currentPosts.length > 0 ? (
                 currentPosts.map((p, index) => (
                   <Grid key={index} item xs={4}>
-                    <React.Suspense fallback={<div />}>
-                      <Post {...p} />
-                    </React.Suspense>
+                    <Post {...p} />
                   </Grid>
                 ))
               ) : (

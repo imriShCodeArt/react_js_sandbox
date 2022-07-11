@@ -28,7 +28,7 @@ function AppBar({ primaryAction, drawerOpen, ...rest }) {
         </IconButton>
       </Box>
       <React.Suspense fallback={<div />}>
-        <Avatar menuGrow>
+        <Avatar >
           <Link text={'Account'} to={'account'} />
           <Link text={'Preferences'} to={'preferences'} />
           <Link text={'Settings'} to={'settings'} />

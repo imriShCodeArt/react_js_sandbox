@@ -1,17 +1,15 @@
 import React from 'react'
-import {
-  Box,
-  Drawer as Root,
-  FormControl,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  MenuItem,
-  Select,
-  Switch,
-  Typography,
-} from '@mui/material'
+import { Drawer as Root } from '@mui/material'
+import Box from '@mui/material/Box'
+import FormControl from '@mui/material/FormControl'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemText from '@mui/material/ListItemText'
+import MenuItem from '@mui/material/MenuItem'
+import Select from '@mui/material/Select'
+import Switch from '@mui/material/Switch'
+import Typography from '@mui/material/Typography'
 function Drawer({ open, anchor, closeAction }) {
   return (
     <Root

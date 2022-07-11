@@ -1,18 +1,18 @@
-import { Grid, List, ListItem, ListItemText, useTheme } from '@mui/material'
+import { Box, useTheme } from '@mui/material'
+import Grid from '@mui/material/Grid'
+import List from '@mui/material/List'
+import ListItem from '@mui/material/ListItem'
+import ListItemText from '@mui/material/ListItemText'
 import React from 'react'
 
 const MyFooterHeading = React.lazy(() => import('components/FooterHeading'))
 const FooterHeading = ({ text }) => (
   <React.Suspense fallback={<div />}>
-    <MyFooterHeading>
-      {text}
-    </MyFooterHeading>
+    <MyFooterHeading>{text}</MyFooterHeading>
   </React.Suspense>
 )
-import { useSelector } from 'react-redux'
 
-function Footer({}) {
-  const posts = useSelector((state) => state.posts)
+function Footer({ posts }) {
   const theme = useTheme()
   const Column = ({ title, empty }) => {
     return (
@@ -44,6 +44,7 @@ function Footer({}) {
 
   return (
     <Grid
+      component={'footer'}
       container
       color={theme.palette.grey[300]}
       bgcolor={theme.palette.grey[700]}

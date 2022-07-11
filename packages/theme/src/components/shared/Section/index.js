@@ -1,8 +1,16 @@
 import React from 'react'
+import Grid from '@mui/material/Grid'
 
-function Section() {
+function Section({ children }) {
   return (
-    <div>Section</div>
+    <Grid
+      container
+      component={'section'}
+      className={`Article_Section Section`}
+      p={'2em 4em'}
+    >
+      {children}
+    </Grid>
   )
 }
 

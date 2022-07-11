@@ -1,33 +1,36 @@
 import React from 'react'
-import {
-  Box,
-  Card,
-  CardContent,
-  CardHeader,
-  Grid,
-  Typography,
-  useTheme,
-} from '@mui/material'
+import { useTheme } from '@mui/material'
+import Box from '@mui/material/Box'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import CardHeader from '@mui/material/CardHeader'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
 import { Outlet } from 'react-router-dom'
 
-const Post = () => {
-  return <Box>POST</Box>
-}
-
-function Category({ children, title, categories = [{}], posts = [{}] }) {
+function Category({ children, title, postElm, posts, categories }) {
+  console.log(postElm)
   const theme = useTheme()
+  const Post = ({ children, ...props }) => postElm({ children, ...props })
 
-  const currentCategory = categories.filter((i) => i.slug === title)
-  const currentPosts = posts.filter((p) => {
-    let hasMatch = 0
-    p.categories.map((c) => {
-      return c.toString().toLowerCase() === currentCategory[0].slug
-        ? (hasMatch += 1)
-        : {}
+  const currentCategory =
+    categories && categories.filter((i) => i.slug === title)
+
+  const currentPosts =
+    posts &&
+    categories &&
+    posts.filter((p) => {
+      let hasMatch = 0
+      p.categories.map((c) => {
+        return c.toString().toLowerCase() === currentCategory[0].slug
+          ? (hasMatch += 1)
+          : {}
+      })
+      return hasMatch > 0 && p
     })
-    return hasMatch > 0 && p
-  })
-  const imgUrl = currentCategory[0].img
+
+  const imgUrl = currentCategory && currentCategory[0].img
+
   return (
     <Card>
       <Box>
@@ -63,7 +66,7 @@ function Category({ children, title, categories = [{}], posts = [{}] }) {
               spacing={theme.spacing(1)}
               py={theme.spacing(2)}
             >
-              {currentPosts.length > 0 ? (
+              {currentPosts && currentPosts.length > 0 ? (
                 currentPosts.map((p, index) => (
                   <Grid key={index} item xs={4}>
                     <Post {...p} />

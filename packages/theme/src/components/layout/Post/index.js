@@ -1,15 +1,14 @@
-import {
-  AvatarGroup,
-  Box,
-  Card,
-  CardContent,
-  CardHeader,
-  Grid,
-  Link,
-  Stack,
-  Typography,
-  useTheme,
-} from '@mui/material'
+import { useTheme } from '@mui/material'
+import AvatarGroup from '@mui/material/AvatarGroup'
+import Box from '@mui/material/Box'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import CardHeader from '@mui/material/CardHeader'
+import Grid from '@mui/material/Grid'
+import Link from '@mui/material/Link'
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
+
 import React from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 

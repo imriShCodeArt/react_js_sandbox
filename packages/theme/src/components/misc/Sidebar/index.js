@@ -1,4 +1,5 @@
-import { Grid, useTheme } from '@mui/material'
+import { useTheme } from '@mui/material'
+import Grid from '@mui/material/Grid'
 import React from 'react'
 
 function Sidebar({ element }) {

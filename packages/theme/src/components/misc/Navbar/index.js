@@ -1,20 +1,29 @@
-import { AppBar, Box, Button } from '@mui/material'
+import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+import AppBar from '@mui/material/AppBar'
 import React from 'react'
-const Menu = React.lazy(() => import('components/Menu'))
-const ImpLink = React.lazy(() => import('components/Link'))
 
-const Link = ({ text, to }) => (
+const MyMenu = React.lazy(() => import('components/Menu'))
+const Menu = ({ children, ...rest }) => (
   <React.Suspense fallback={<div />}>
-    <ImpLink text={text} to={to} />
+    <MyMenu {...rest}>{children}</MyMenu>
   </React.Suspense>
 )
-function NavBar({ drawerOpen }) {
+
+const MyLink = React.lazy(() => import('components/Link'))
+const Link = ({ text, to }) => (
+  <React.Suspense fallback={<div />}>
+    <MyLink text={text} to={to} />
+  </React.Suspense>
+)
+function NavBar({}) {
   return (
     <AppBar
       variant='outlined'
       elevation={0}
       color='secondary'
       position='sticky'
+      component={'nav'}
     >
       <Box>
         <Link color='primary' text={'Home'} to={''} />

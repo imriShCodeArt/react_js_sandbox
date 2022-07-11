@@ -1,13 +1,9 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { Provider } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import './index.css'
 
-import Theme from './theme'
-import { store } from './store'
-
-import { BrowserRouter, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import Page404 from './pages/Page404'
 import Home from './pages/Home'
 import About from './pages/About'
@@ -20,19 +16,30 @@ const SidebarElm = () => (
   </React.Suspense>
 )
 
+const MyTheme = React.lazy(() => import('theme/Theme'))
+const Theme = ({ children, ...rest }) => (
+  <React.Suspense fallback={<div />}>
+    <MyTheme {...rest}>{children}</MyTheme>
+  </React.Suspense>
+)
+
+const Post = React.lazy(() => import('cards/Post'))
+const PostElm = ({ children, ...rest }) => (
+  <React.Suspense fallback={<div />}>
+    <Post {...rest}>{children}</Post>
+  </React.Suspense>
+)
+
 const App = () => {
+  const state = useSelector((state) => state)
   return (
-    <BrowserRouter>
-      <Provider store={store}>
-        <Theme sidebarElm={<SidebarElm />}>
-          <Route path=':pages' element={<Page404 />} />
-          <Route index element={<Home />} />
-          <Route path={'about'} element={<About />} />
-          <Route path={'contact'} element={<Contact />} />
-        </Theme>
-      </Provider>
-    </BrowserRouter>
+    <Theme state={state} sidebarElm={<SidebarElm />} postElm={PostElm}>
+      <Route path=':pages' element={<Page404 />} />
+      <Route index element={<Home />} />
+      <Route path={'about'} element={<About />} />
+      <Route path={'contact'} element={<Contact />} />
+    </Theme>
   )
 }
-const root = ReactDOM.createRoot(document.getElementById('app'))
-root.render(<App />)
+
+export default App

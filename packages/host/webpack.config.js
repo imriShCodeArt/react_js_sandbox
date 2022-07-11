@@ -53,6 +53,7 @@ module.exports = {
       remotes: {
         components: 'components@http://localhost:4010/remoteEntry.js',
         cards: 'cards@http://localhost:4020/remoteEntry.js',
+        theme: 'theme@http://localhost:4000/remoteEntry.js',
       },
       exposes: {},
       shared: {

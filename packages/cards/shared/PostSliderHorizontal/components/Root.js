@@ -6,6 +6,7 @@ function Root({ children, height, index }) {
   return (
     <Box
       height={height}
+      maxWidth={'98.5vw'}
       px={'4em'}
       display={'flex'}
       flexWrap='nowrap'

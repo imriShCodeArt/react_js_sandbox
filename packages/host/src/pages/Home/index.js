@@ -1,4 +1,4 @@
-import { Box, Container } from '@mui/material'
+
 import React from 'react'
 
 const MyPostSliderHorizontal = React.lazy(() =>
@@ -12,56 +12,63 @@ const PostSliderHorizontal = () => (
 const MyPostsForCategory = React.lazy(() => import('cards/PostsForCategory'))
 const PostsForCategory = ({ ...props }) => (
   <React.Suspense fallback={<div />}>
-    <MyPostsForCategory {...props} />
+    <MyPostsForCategory
+      posts={[{}, {}, {}, {}, {}, {}, {}, {}, {}]}
+      {...props}
+    />
   </React.Suspense>
 )
 
-const MyAuthors = React.lazy(() => import('cards/Authors'))
-const Authors = ({}) => (
+const MyAuthor = React.lazy(() => import('cards/Author'))
+const Author = ({}) => (
   <React.Suspense fallback={<div />}>
-    <MyAuthors />
+    <MyAuthor />
   </React.Suspense>
 )
+
+const MySection = React.lazy(() => import('theme/Section'))
+const Section = ({ children, ...rest }) => (
+  <React.Suspense fallback={<div />}>
+    <MySection {...rest}>{children}</MySection>
+  </React.Suspense>
+)
+const MyColumn = React.lazy(() => import('theme/Column'))
+const Column = ({ children, ...rest }) => (
+  <React.Suspense fallback={<div />}>
+    <MyColumn {...rest}>{children}</MyColumn>
+  </React.Suspense>
+)
+
 function Home() {
   return (
-    <Box>
-      <Container>
-        <PostSliderHorizontal />
-      </Container>
-      <Container>
-        <PostsForCategory
-          categoryName={'Science'}
-          posts={[
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-            {},
-          ]}
-        />
-      </Container>
-      <Container>
-        <PostsForCategory
-          categoryName={'Nature'}
-          flipDirection
-          posts={[{}, {}, {}, {}, {}, {}, {}, {},{}]}
-        />
-      </Container>
-      <Container>
-        <Authors />
-      </Container>
-    </Box>
+    <>
+      <Section>
+        <Column>
+          <PostSliderHorizontal />
+        </Column>
+      </Section>
+      <Section>
+        <Column>
+          <PostsForCategory categoryName={'Science'} />
+        </Column>
+      </Section>
+      <Section>
+        <Column>
+          <PostsForCategory categoryName={'Nature'} flipDirection />
+        </Column>
+      </Section>
+      <Section>
+        <Column xs={4}>
+          <Author />
+        </Column>
+        <Column xs={4}>
+          <Author />
+        </Column>
+        <Column xs={4}>
+          <Author />
+        </Column>
+      </Section>
+    </>
   )
 }
 
