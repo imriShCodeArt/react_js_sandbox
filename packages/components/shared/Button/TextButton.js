@@ -3,7 +3,7 @@ import React from 'react'
 
 function TextButton({ text, action, color, children, ...rest}) {
   return (
-    <Button size='small' variant='text' onClick={action} color={color}>
+    <Button size='small' variant='text' onClick={action} color={color} {...rest} >
         {children || text || 'Click'}
     </Button>
   )

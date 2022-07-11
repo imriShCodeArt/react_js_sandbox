@@ -56,6 +56,9 @@ module.exports = {
         './Post': './shared/Post',
         './PostSliderHorizontal': './shared/PostSliderHorizontal',
         './PostsSidebar': './shared/PostsSidebar',
+        './PostsForCategory': './shared/PostsForCategory',
+        './Authors': './shared/Authors',
+        './Thumbnile': './shared/Thumbnile',
       },
       shared: {
         ...deps,

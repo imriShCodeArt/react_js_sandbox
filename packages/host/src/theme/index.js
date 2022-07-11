@@ -10,17 +10,13 @@ import Drawer from './components/misc/Drawer'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Page from './components/layout/Page'
 import Post from './components/layout/Post'
-import Home from '../pages/Home'
-import About from '../pages/About'
-import Contact from '../pages/Contact'
-import Page404 from '../pages/Page404'
 import Category from './components/layout/Category'
 import { useSelector } from 'react-redux'
 
 const PostsSidebar = React.lazy(() => import('cards/PostsSidebar'))
 const CategoriesSidebar = React.lazy(() => import('cards/CategoriesSidebar'))
 
-function Theme({}) {
+function Theme({ children }) {
   const location = useLocation()
     .pathname.split('/')
     .filter((i) => i !== '')
@@ -69,10 +65,7 @@ function Theme({}) {
           path='/*'
           element={<Page title={pageTitle} highHeader={highHeader} />}
         >
-          <Route path=':pages' element={<Page404 />} />
-          <Route index element={<Home />} />
-          <Route path={'about'} element={<About />} />
-          <Route path={'contact'} element={<Contact />} />
+          {children}
         </Route>
         {/*--------------------- Posts layout: ---------------------*/}
         <Route path='entry' element={<Post {...currentPost[0]} />}>
