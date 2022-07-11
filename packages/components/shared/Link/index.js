@@ -1,14 +1,24 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import TextButton from 'components/Button/TextButton'
+import { Link as Root } from '@mui/material'
 
-function Link({ to, text, color, children, nav }) {
-  const navigate = nav || useNavigate()
+function Link({ to, text, color, children, ...rest }) {
+  const navigate = useNavigate()
+
+  function scrollAndNav() {
+    window.scrollTo(0, 0)
+    navigate(`${to}`)
+  }
 
   return (
-    <TextButton color={color} action={() => navigate(`${to}`)}>
+    <Root
+      color={color}
+      sx={{ cursor: 'pointer', textDecoration:'none' }}
+      onClick={() => scrollAndNav()}
+      {...rest}
+    >
       {children || text}
-    </TextButton>
+    </Root>
   )
 }
 Link.defaultProps = {

@@ -9,7 +9,7 @@ function ArrowRight({ height, moveHoriz, disabled, action }) {
   return (
     <Box
       position={'absolute'}
-      right={'3em'}
+      right='3em'
       display={'flex'}
       alignItems={'center'}
       minHeight={height}

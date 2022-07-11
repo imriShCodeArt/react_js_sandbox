@@ -14,12 +14,11 @@ const Post = React.lazy(() => import('cards/Post'))
 
 import { useSelector } from 'react-redux'
 
-function Category({ children, title }) {
-  const { categories, posts } = useSelector((state) => state)
+function Category({ children, title, posts, categories }) {
   const theme = useTheme()
 
-  const currentCategory = categories.filter((i) => i.slug === title)
-  const currentPosts = posts.filter((p) => {
+  const currentCategory = categories && categories.filter((i) => i.slug === title)
+  const currentPosts = posts && categories && posts.filter((p) => {
     let hasMatch = 0
     p.categories.map((c) => {
       return c.toString().toLowerCase() === currentCategory[0].slug
@@ -28,7 +27,7 @@ function Category({ children, title }) {
     })
     return hasMatch > 0 && p
   })
-  const imgUrl = currentCategory[0].img
+  const imgUrl = currentCategory && currentCategory[0].img
   return (
     <Card>
       <Box>
@@ -64,7 +63,7 @@ function Category({ children, title }) {
               spacing={theme.spacing(1)}
               py={theme.spacing(2)}
             >
-              {currentPosts.length > 0 ? (
+              {currentPosts && currentPosts.length > 0 ? (
                 currentPosts.map((p, index) => (
                   <Grid key={index} item xs={4}>
                     <React.Suspense fallback={<div />}>

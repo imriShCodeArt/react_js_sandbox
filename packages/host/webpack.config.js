@@ -72,7 +72,7 @@ module.exports = {
       },
     }),
     new HtmlWebPackPlugin({
-      template: './src/index.html',
+      template: './src/index.html',      
     }),
   ],
 }

@@ -8,7 +8,6 @@ import Root from './components/Root'
 
 function PostSliderHorizontal({
   posts = [{}, {}, {}, {}, {}, {}, {}, {}],
-  nav,
   globalElementHeight = '300px',
   step = 750,
 }) {
@@ -28,7 +27,7 @@ function PostSliderHorizontal({
         key={index}
         sx={{ p: '1em' }}
       >
-        <Post nav={nav} short {...p} />
+        <Post short {...p} />
       </Box>
     ))
 

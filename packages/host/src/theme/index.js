@@ -10,40 +10,29 @@ import Drawer from './components/misc/Drawer'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Page from './components/layout/Page'
 import Post from './components/layout/Post'
-import Home from '../pages/Home'
-import About from '../pages/About'
-import Contact from '../pages/Contact'
-import Page404 from '../pages/Page404'
 import Category from './components/layout/Category'
-import { useSelector } from 'react-redux'
 
 const PostsSidebar = React.lazy(() => import('cards/PostsSidebar'))
 const CategoriesSidebar = React.lazy(() => import('cards/CategoriesSidebar'))
 
-function Theme({}) {
+function Theme({ children, posts, categories, highHeader }) {
   const location = useLocation()
-    .pathname.split('/')
-    .filter((i) => i !== '')
-
+  .pathname.split('/')
+  .filter((i) => i !== '')
+  
   const [pageTitle, setPageTitle] = useState()
   const updatePageTitle = () =>
-    setPageTitle(location.length === 1 && location[0])
-
-  const categories = useSelector((state) => state.categories)
-
+  setPageTitle(location.length === 1 && location[0])
+  
   // POST META:
-  const currentPost = useSelector((state) => state.posts).filter(
+  const currentPost = posts ? posts.filter(
     (p) => p.slug === location[location.length - 1]
-  )
-
-  // HEADER PROPS:
-  const [highHeader, setHighHeader] = useState(location.length === 0 && true)
-  const updateHeader = () => setHighHeader(location.length === 0 ? true : false)
-
-  // LOCATION EFFECTS:
-  useEffect(() => {
+    ) : {}
+    
+    
+    // LOCATION EFFECTS:
+    useEffect(() => {
     updatePageTitle()
-    updateHeader()
   }, [location])
 
   //DRAWER PROPS:
@@ -69,10 +58,7 @@ function Theme({}) {
           path='/*'
           element={<Page title={pageTitle} highHeader={highHeader} />}
         >
-          <Route path=':pages' element={<Page404 />} />
-          <Route index element={<Home />} />
-          <Route path={'about'} element={<About />} />
-          <Route path={'contact'} element={<Contact />} />
+          {children}
         </Route>
         {/*--------------------- Posts layout: ---------------------*/}
         <Route path='entry' element={<Post {...currentPost[0]} />}>
@@ -89,7 +75,7 @@ function Theme({}) {
             }
           />
         </Route>
-        <Route path='category' element={<Category title={location[1]} />}>
+        <Route path='category' element={<Category categories={categories} posts={posts} title={location[1]} />}>
           <Route
             path=':categories'
             element={

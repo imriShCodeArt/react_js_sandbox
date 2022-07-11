@@ -6,10 +6,15 @@ import {
   Typography,
 } from '@mui/material'
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+
+const MyLink = React.lazy(() => import('components/Link'))
+const Link = ({ to, children }) => (
+  <React.Suspense fallback={<div />}>
+    <MyLink to={to}>{children}</MyLink>
+  </React.Suspense>
+)
 
 function CategoriesSidebar({ items = [] }) {
-  const navigate = useNavigate()
   return (
     <Paper sx={{ my: '.5em' }}>
       <Typography p={'.25em 0 .25em .25em'} variant='h4'>
@@ -18,8 +23,8 @@ function CategoriesSidebar({ items = [] }) {
       <List disablePadding>
         {items.map((i) => (
           <ListItem key={i.id} disableGutters>
-            <ListItemButton onClick={() => navigate(`/category/${i.slug}`)}>
-              {i.name}
+            <ListItemButton>
+              <Link to={`/category/${i.slug}`}>{i.name}</Link>
             </ListItemButton>
           </ListItem>
         ))}
