@@ -11,28 +11,35 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import Page from './components/layout/Page'
 import Post from './components/layout/Post'
 import Category from './components/layout/Category'
+import { useSelector } from 'react-redux'
 
 const PostsSidebar = React.lazy(() => import('cards/PostsSidebar'))
 const CategoriesSidebar = React.lazy(() => import('cards/CategoriesSidebar'))
 
-function Theme({ children, posts, categories, highHeader }) {
+function Theme({ children }) {
   const location = useLocation()
-  .pathname.split('/')
-  .filter((i) => i !== '')
-  
+    .pathname.split('/')
+    .filter((i) => i !== '')
+
   const [pageTitle, setPageTitle] = useState()
   const updatePageTitle = () =>
-  setPageTitle(location.length === 1 && location[0])
-  
+    setPageTitle(location.length === 1 && location[0])
+
+  const categories = useSelector((state) => state.categories)
+
   // POST META:
-  const currentPost = posts ? posts.filter(
+  const currentPost = useSelector((state) => state.posts).filter(
     (p) => p.slug === location[location.length - 1]
-    ) : {}
-    
-    
-    // LOCATION EFFECTS:
-    useEffect(() => {
+  )
+
+  // HEADER PROPS:
+  const [highHeader, setHighHeader] = useState(location.length === 0 && true)
+  const updateHeader = () => setHighHeader(location.length === 0 ? true : false)
+
+  // LOCATION EFFECTS:
+  useEffect(() => {
     updatePageTitle()
+    updateHeader()
   }, [location])
 
   //DRAWER PROPS:
@@ -75,7 +82,7 @@ function Theme({ children, posts, categories, highHeader }) {
             }
           />
         </Route>
-        <Route path='category' element={<Category categories={categories} posts={posts} title={location[1]} />}>
+        <Route path='category' element={<Category title={location[1]} />}>
           <Route
             path=':categories'
             element={

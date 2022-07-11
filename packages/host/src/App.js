@@ -12,7 +12,6 @@ import Page404 from './pages/Page404'
 import Home from './pages/Home'
 import About from './pages/About'
 import Contact from './pages/Contact'
-import Wrapper from './Wrapper'
 
 const PostsSidebar = React.lazy(() => import('cards/PostsSidebar'))
 const SidebarElm = () => (
@@ -25,21 +24,12 @@ const App = () => {
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <Wrapper>
-          <Theme
-            // posts={posts}
-            // highHeader={highHeader}
-            // categories={categories}
-            // location={location}
-            // pageTitle={pageTitle}
-            sidebarElm={<SidebarElm />}
-          >
-            <Route path=':pages' element={<Page404 />} />
-            <Route index element={<Home />} />
-            <Route path={'about'} element={<About />} />
-            <Route path={'contact'} element={<Contact />} />
-          </Theme>
-        </Wrapper>
+        <Theme sidebarElm={<SidebarElm />}>
+          <Route path=':pages' element={<Page404 />} />
+          <Route index element={<Home />} />
+          <Route path={'about'} element={<About />} />
+          <Route path={'contact'} element={<Contact />} />
+        </Theme>
       </Provider>
     </BrowserRouter>
   )
