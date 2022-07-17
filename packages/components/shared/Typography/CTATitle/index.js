@@ -1,5 +1,6 @@
 import Typography from '@mui/material/Typography'
 import React from 'react'
+import PropTypes from 'prop-types'
 
 function CTATitle({ text, children, ...rest }) {
   return (
@@ -8,5 +9,7 @@ function CTATitle({ text, children, ...rest }) {
     </Typography>
   )
 }
-
+CTATitle.propTypes = {
+  text: PropTypes.string,
+}
 export default CTATitle
