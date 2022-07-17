@@ -8,20 +8,29 @@ import Avatar from 'components/Avatar'
 
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
+// import Theme from './Theme'
+
+const MyTheme = React.lazy(() => import('theme/Theme'))
+const Theme = ({ children, ...rest }) => (
+  <React.Suspense fallback={<div />}>
+    <MyTheme {...rest} >
+      {children}
+    </MyTheme>
+  </React.Suspense>
+)
 
 const App = () => (
   <BrowserRouter>
-    <div>
-    <Avatar >
-          <Link text={'Account'} to={'account'} />
-          <Link text={'Preferences'} to={'preferences'} />
-          <Link text={'Settings'} to={'settings'} />
-          <Divider variant='middle' />
-          <Link text={'Profile'} to={'profile'} />
-          <Link text={'Logout'} to={'logout'} />
-        </Avatar>
-
-    </div>
+    <Theme state={{}}>
+      <Avatar>
+        <Link text={'Account'} to={'account'} />
+        <Link text={'Preferences'} to={'preferences'} />
+        <Link text={'Settings'} to={'settings'} />
+        <Divider variant='middle' />
+        <Link text={'Profile'} to={'profile'} />
+        <Link text={'Logout'} to={'logout'} />
+      </Avatar>
+    </Theme>
   </BrowserRouter>
 )
 

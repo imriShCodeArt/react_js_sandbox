@@ -46,7 +46,9 @@ module.exports = {
     new ModuleFederationPlugin({
       name: 'components',
       filename: 'remoteEntry.js',
-      remotes: {},
+      remotes: {
+        theme: 'theme@http://localhost:4000/remoteEntry.js'
+      },
       exposes: {
         './Avatar': './shared/Avatar',
         './Breadcrumbs': './shared/Breadcrumbs',

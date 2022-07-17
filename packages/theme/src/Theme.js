@@ -20,7 +20,7 @@ function Theme({ children, postElm, sidebarElm, state }) {
   const { categories, posts } = state
 
   // POST META:
-  const currentPost = posts.filter(
+  const currentPost = posts && posts.filter(
     (p) => p.slug === location[location.length - 1]
   )
 
