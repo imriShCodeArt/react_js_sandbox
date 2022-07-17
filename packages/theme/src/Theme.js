@@ -17,7 +17,7 @@ function Theme({ children, postElm, sidebarElm, state }) {
     .pathname.split('/')
     .filter((i) => i !== '')
 
-  const { categories, posts } = state 
+  const { categories, posts } = state
 
   // POST META:
   const currentPost = posts.filter(
@@ -43,7 +43,10 @@ function Theme({ children, postElm, sidebarElm, state }) {
       <Routes>
         {/* --------------------- Wrong Page Display: --------------------- */}
         {/* --------------------- Pages layout: --------------------- */}
-        <Route path='/*' element={<Page location={location} />}>
+        <Route
+          path='/*'
+          element={<Page location={location} />}
+        >
           {children}
         </Route>
         {/*--------------------- Posts layout: ---------------------*/}

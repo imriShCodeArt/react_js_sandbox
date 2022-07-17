@@ -13,6 +13,8 @@ module.exports = {
     alias: {
       components: path.resolve(__dirname, './src/components'),
       assets: path.resolve(__dirname, './src/assets'),
+      features: path.resolve(__dirname, './src/features'),
+      vars: path.resolve(__dirname, './vars'),
     },
   },
 
@@ -54,7 +56,7 @@ module.exports = {
       exposes: {
         './Theme': './src/Theme',
         './Column': './src/components/shared/Column',
-        './Section': './src/components/shared/Section',
+        './Section': './src/components/shared/Section'
       },
       shared: {
         ...deps,

@@ -17,7 +17,5 @@ export const CATEGORIES_FEATURED_IMAGE = [
 ]
 
 export const PAGES_FEATURED_IMAGE = [
-    'https://img.freepik.com/free-vector/abstract-low-poly-orange-yellow-background_1017-32111.jpg?w=2000',
-    'https://www.designrush.com/uploads/users/customer-11/image_1530667878_gQ0EfQfL9GHKYrCdjsUuKRjzTU2JwMZYKso6vcpp.jpeg',
-    'https://previews.123rf.com/images/oneinchpunch/oneinchpunch1403/oneinchpunch140300100/27097182-tropical-beach-wide-angle-view.jpg'
+    ''
 ]

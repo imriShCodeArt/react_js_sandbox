@@ -1,11 +1,32 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Menu as Root, Box, Divider } from '@mui/material'
+import { Menu as Root, Box, MenuItem } from '@mui/material'
 import MenuButton from '../Button/MenuButton'
-import Item from './components/Item'
 
-function Menu({ id, name, rootEl, children, dense, divided, grow, ...rest }) {
-  const anchorId = name ? `${name}_button` : 'basic-button'
+const MapChlidrenToItems = ({ children, dense }) => {
+  const hasMoreThanOneChild = children && children.length > 1
+  if (hasMoreThanOneChild) {
+    const c = children.map((c, index) => {
+      const elementTypeStr =
+        c.type.name === 'Divider' || c.type.render !== undefined
+          ? c.type.render.name
+          : c.type.name
+      return elementTypeStr !== 'Divider' ? (
+        <div key={index}>
+          <MenuItem dense={dense}>{c}</MenuItem>
+        </div>
+      ) : (
+        c
+      )
+    })
+    return c
+  }
+  return <MenuItem dense={dense}>{children}</MenuItem>
+}
+
+function Menu({ name, triggerElm, children, dense, nogrow, ...rest }) {
+  const id = `${name}-menu`
+  const anchorId = name ? `${name}-button` : 'basic-button'
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [menuWidth, setMenuWidth] = React.useState(0)
   const open = Boolean(anchorEl)
@@ -15,32 +36,17 @@ function Menu({ id, name, rootEl, children, dense, divided, grow, ...rest }) {
   useEffect(() => {
     anchorEl && setMenuWidth(anchorEl.clientWidth)
   }, [anchorEl])
-  const Trigger = () => (
-    <MenuButton open={open} setAnchor={setAnchorEl}>
-      {rootEl || 'Click'}
-    </MenuButton>
-  )
-
-  const ChildElm = () => (
-    <>
-      {children && children.length > 1 ? (
-        children.map((c, index) => {
-          return (
-            <div key={index}>
-              <Item dense={dense}>{c}</Item>
-              {index === divided - 1 && <Divider variant='middle' />}
-            </div>
-          )
-        })
-      ) : (
-        <Item dense={dense}>{children}</Item>
-      )}
-    </>
-  )
 
   return (
     <Box display={'inline-block'} {...rest}>
-      <Trigger />
+      <MenuButton
+        id={anchorId}
+        controls={id}
+        open={open}
+        setAnchor={setAnchorEl}
+      >
+        {triggerElm}
+      </MenuButton>
       <Root
         id={id}
         anchorEl={anchorEl}
@@ -51,12 +57,12 @@ function Menu({ id, name, rootEl, children, dense, divided, grow, ...rest }) {
         }}
         PaperProps={{
           sx: {
-            minWidth: { xs: grow && '90vw', md: menuWidth },
+            minWidth: { xs: nogrow ? menuWidth : '90vw', md: menuWidth },
           },
         }}
         disableScrollLock
       >
-        <ChildElm />
+        <MapChlidrenToItems dense={dense}>{children}</MapChlidrenToItems>
       </Root>
     </Box>
   )
@@ -64,12 +70,14 @@ function Menu({ id, name, rootEl, children, dense, divided, grow, ...rest }) {
 
 Menu.propTypes = {
   triggerElm: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  id: PropTypes.string,
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  nogrow: PropTypes.bool,
+  dense: PropTypes.bool,
 }
 
 Menu.defaultProps = {
-  id: 'basic-menu',
+  name: 'basic',
+  triggerElm: 'Click',
 }
 
 export default Menu

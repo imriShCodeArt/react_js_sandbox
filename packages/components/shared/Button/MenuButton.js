@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box } from '@mui/material'
+import Box from '@mui/material/Box'
 import PropTypes from 'prop-types'
 
 function Root({ children, ...rest }) {
@@ -20,7 +20,6 @@ function Root({ children, ...rest }) {
 function MenuButton({
   id,
   controls,
-  hasPop,
   setAnchor,
   open,
   color,
@@ -34,7 +33,7 @@ function MenuButton({
     <Root
       id={id}
       aria-controls={open ? controls : undefined}
-      aria-haspopup={hasPop}
+      aria-haspopup={'menu'}
       aria-expanded={open ? 'true' : undefined}
       onClick={handleClick}
       color={color}
@@ -47,14 +46,6 @@ function MenuButton({
 
 MenuButton.propTypes = {
   id: PropTypes.string,
-  hasPop: PropTypes.oneOf([
-    'true',
-    'menu',
-    'listbox',
-    'tree',
-    'grid',
-    'dialog',
-  ]), // describes the popup's type
   controls: PropTypes.string, // the id of the element which is controlled by this button
   open: PropTypes.bool,
   color: PropTypes.oneOf([

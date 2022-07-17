@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent'
 import CardHeader from '@mui/material/CardHeader'
 import { Outlet } from 'react-router-dom'
 
-function Page({ children, location }) {
+function Page({ children, location, context }) {
   const [pageTitle, setPageTitle] = useState()
   const updatePageTitle = () =>
     setPageTitle(location.length === 1 && location[0])
@@ -18,10 +18,11 @@ function Page({ children, location }) {
     updateHeader()
   }, [location])
 
-  const imgUrl = () => {
+  const imgUrl = 
+  () => {
     switch (pageTitle) {
       case false:
-        return 'https://i.etsystatic.com/9947821/r/il/6e6dd1/2044263026/il_fullxfull.2044263026_j126.jpg'
+        return 'https://img.freepik.com/free-vector/abstract-low-poly-orange-yellow-background_1017-32111.jpg?w=2000'
       case 'contact':
         return 'https://www.designrush.com/uploads/users/customer-11/image_1530667878_gQ0EfQfL9GHKYrCdjsUuKRjzTU2JwMZYKso6vcpp.jpeg'
       default:
@@ -51,7 +52,7 @@ function Page({ children, location }) {
       <CardContent
         component={'main'}
         className='Page_Content'
-        sx={{ p: '0', pb:'4em!important', pt:'4em' }}
+        sx={{ p: '0', pb: '4em!important', pt: '4em' }}
       >
         {children || <Outlet />}
       </CardContent>

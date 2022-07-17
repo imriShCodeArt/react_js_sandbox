@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Box, IconButton, Typography } from '@mui/material'
+import { Box, Divider, IconButton, Typography } from '@mui/material'
 import { Menu as MenuIcon } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import Root from './Root'
@@ -28,10 +28,11 @@ function AppBar({ primaryAction, drawerOpen, ...rest }) {
         </IconButton>
       </Box>
       <React.Suspense fallback={<div />}>
-        <Avatar >
+        <Avatar square>
           <Link text={'Account'} to={'account'} />
           <Link text={'Preferences'} to={'preferences'} />
           <Link text={'Settings'} to={'settings'} />
+          <Divider variant='middle' />
           <Link text={'Profile'} to={'profile'} />
           <Link text={'Logout'} to={'logout'} />
         </Avatar>
