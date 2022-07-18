@@ -16,9 +16,10 @@ function Root({ children, width, drawerOpen, ...rest }) {
       elevation={0}
     >
       <Box
-        alignItems={'baseline'}
+        alignItems={'center'}
         justifyContent={'space-between'}
         display='flex'
+        minHeight={'2em'}
       >
         {children}
       </Box>

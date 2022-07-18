@@ -1,22 +1,49 @@
+import React, { useContext } from 'react'
+
 import Box from '@mui/material/Box'
 import AppBar from '@mui/material/AppBar'
-import React from 'react'
 import Typography from '@mui/material/Typography'
+import { Link, Menu } from './components'
+import ThemeContext from '../../../assets/ThemeContext'
 
-const MyMenu = React.lazy(() => import('components/Menu'))
-const Menu = ({ children, ...rest }) => (
-  <React.Suspense fallback={<div />}>
-    <MyMenu {...rest}>{children}</MyMenu>
-  </React.Suspense>
-)
-
-const MyLink = React.lazy(() => import('components/Link'))
-const Link = ({ text, to }) => (
-  <React.Suspense fallback={<div />}>
-    <MyLink text={text} to={to} />
-  </React.Suspense>
-)
-function NavBar({}) {
+function NavBar() {
+  const links = useContext(ThemeContext()).navLinks
+  const ListOfLinks = () =>
+    links &&
+    links.map(({ text, href, subLinks }, i) => {
+      const Item = !subLinks ? (
+        <Link key={i} text={text} to={href} />
+      ) : (
+        <Menu
+          key={i}
+          triggerElm={
+            <Typography sx={{ px: '1em' }} color={'primary'}>
+              {text}
+            </Typography>
+          }
+        >
+          {subLinks.map(({ text, href, subLinks }, j) =>
+            !subLinks ? (
+              <Link key={i} text={text} to={href} />
+            ) : (
+              <Menu
+                key={i}
+                triggerElm={
+                  <Typography sx={{ px: '1em' }} color={'primary'}>
+                    {text}
+                  </Typography>
+                }
+              >
+                {subLinks.map(({ text, href }, j) => (
+                  <Link key={j} text={text} to={href} />
+                ))}
+              </Menu>
+            )
+          )}
+        </Menu>
+      )
+      return Item
+    })
   return (
     <AppBar
       variant='outlined'
@@ -26,19 +53,7 @@ function NavBar({}) {
       component={'nav'}
     >
       <Box>
-        <Link color='primary' text={'Home'} to={''} />
-        <React.Suspense fallback={<div />}>
-          <Menu
-            triggerElm={<Typography color={'primary'}>Categories</Typography>}
-          >
-            <Link text={'Science'} to='category/science' />
-            <Link text={'Nature'} to='category/nature' />
-            <Link text={'Space'} to='category/space' />
-          </Menu>
-        </React.Suspense>
-        <Link color='primary' text={'About'} to='about' />
-        <Link color='primary' text={'Contact'} to='contact' />
-        <Link color='primary' text={'404'} to='wrong_address' />
+        <ListOfLinks />
       </Box>
     </AppBar>
   )

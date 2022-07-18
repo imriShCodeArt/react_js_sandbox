@@ -1,5 +1,5 @@
 import { CATEGORIES, CATEGORIES_FEATURED_IMAGE } from 'vars'
-import { capitalize, lowerCase } from './utils'
+import { capitalize, lowerCase } from '../assets/utils'
 
 export const myState = {
   posts: [
