@@ -9,8 +9,9 @@ function BottomNavbar() {
   const navigate = useNavigate()
   const theme = useTheme()
   return (
-    <BottomNavigation
+    <BottomNavigation 
       sx={{
+        zIndex:999,
         display: { xs: 'flex', md: 'none' },
         flexWrap:'wrap',
         position: 'fixed',

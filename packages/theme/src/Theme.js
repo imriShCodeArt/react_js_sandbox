@@ -30,7 +30,7 @@ function Theme({ appbar, navbarLinks, footer, brand, children }) {
   const MyAppBar = () =>
     appbar && <AppBar action={openDrawer} setDrawerContent={setDrawerContent} />
   const MyNavBar = () => navbarLinks && <NavBar />
-  const MyDrawer = () => <Drawer />
+  const MyDrawer = () => <Drawer  />
   const MyBottomNavbar = () => navbarLinks && <BottomNavbar />
   const MyFooter = () => footer && <Footer />
 

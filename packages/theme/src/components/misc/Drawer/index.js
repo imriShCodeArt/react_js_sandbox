@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Drawer as Root } from '@mui/material'
+import { Drawer as Root, useTheme } from '@mui/material'
 import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl'
 import List from '@mui/material/List'
@@ -12,19 +12,22 @@ import Switch from '@mui/material/Switch'
 import Typography from '@mui/material/Typography'
 import ThemeContext from 'assets/ThemeContext'
 
-function Drawer() {
-  const {closeDrawer, anchor, open, variant, content} = useContext(ThemeContext).drawerData
-  // console.log(closeDrawer, anchor, open, variant, content)
+function Drawer({}) {
+  const theme = useTheme()
+  const { closeDrawer, anchor, open, variant, content } =
+    useContext(ThemeContext).drawerData
+  console.log()
   return (
     <Root
       BackdropProps={{ sx: { bgcolor: 'transparent' } }}
       open={open}
-      anchor={anchor}
+      anchor={window.innerWidth < theme.breakpoints.values.md ? 'top' : anchor}
       onClose={closeDrawer}
       variant={variant}
+      SlideProps={{direction:'down'}}
     >
       {content || (
-        <Box width={{ xs: '250px', md: '300px' }} pt={'5em'}>
+        <Box width={{ xs: '100vw', md: '300px' }} pt={'5em'}>
           <List>
             <Typography variant='h5'>Settings</Typography>
             <ListItem>
@@ -57,9 +60,11 @@ function Drawer() {
   )
 }
 
-Drawer.defaultProps = {
-  open: false,
-  anchor: 'left',
-}
+// Drawer.propsTypes = {
+//   anchor: PropTypes.oneOf(['left', 'top', 'right', 'bottom']),
+//   variant: PropTypes.oneOf(['temporary', 'permanent', 'persistant']),
+//   content: PropTypes.element,
+//   open: PropTypes.func,
+// }
 
 export default Drawer

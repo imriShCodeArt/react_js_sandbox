@@ -3,7 +3,6 @@ import Box from '@mui/material/Box'
 import React from 'react'
 
 function Root({ children, width, drawerOpen, ...rest }) {
-  console.log(window.innerWidth)
   return (
     <AppBar
       sx={{
