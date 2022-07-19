@@ -17,7 +17,6 @@ module.exports = {
       vars: path.resolve(__dirname, './vars'),
     },
   },
-
   devServer: {
     port: 4000,
     historyApiFallback: true,

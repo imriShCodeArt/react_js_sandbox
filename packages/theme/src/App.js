@@ -5,11 +5,10 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import './index.css'
 import Theme from './Theme'
 
-const App = () => {
-  
+const App = () => {  
   return (
-      <Theme state={{}}>
-        <Route path={'*'} element={<>Hello</>} />
+      <Theme appbar={{}}>
+        <Route path={'*'} element={<>HeLLo</>} />
       </Theme>
   )
 }

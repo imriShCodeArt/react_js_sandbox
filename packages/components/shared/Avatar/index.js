@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 
 function Avatar({ children, text, small, menuNoGrow, square }) {
   const root = (
-    <Button sx={{ minWidth: '0', padding: 0 }} size='small' color='secondary'>
+    <Button sx={{ minWidth: '0', padding: 0 }} color='secondary'>
       <AvatarRootElm square={square} small={small}>
         {text}
       </AvatarRootElm>

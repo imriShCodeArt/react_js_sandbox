@@ -10,47 +10,49 @@ import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
 import Switch from '@mui/material/Switch'
 import Typography from '@mui/material/Typography'
-import ThemeContext from '../../../assets/ThemeContext'
+import ThemeContext from 'assets/ThemeContext'
+
 function Drawer() {
-  const { open, anchor, closeDrawer } = useContext(ThemeContext).drawer
-  console.log(open)
-  console.log(anchor)
-  console.log(closeDrawer)
+  const {closeDrawer, anchor, open, variant, content} = useContext(ThemeContext).drawerData
+  // console.log(closeDrawer, anchor, open, variant, content)
   return (
     <Root
       BackdropProps={{ sx: { bgcolor: 'transparent' } }}
       open={open}
       anchor={anchor}
       onClose={closeDrawer}
+      variant={variant}
     >
-      <Box width={{ xs: '250px', md: '300px' }} pt={'5em'}>
-        <List>
-          <Typography variant='h5'>Settings</Typography>
-          <ListItem>
-            <ListItemText>Dark mode:</ListItemText>
-            <ListItemButton>
-              <Switch />
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemText>Language:</ListItemText>
-            <ListItemButton>
-              <FormControl fullWidth>
-                <Select
-                  labelId='demo-simple-select-label'
-                  id='demo-simple-select'
-                  value={open}
-                  label='Age'
-                  onChange={() => {}}
-                >
-                  <MenuItem value={'english'}>English</MenuItem>
-                  <MenuItem value={'hebrew'}>Hebrew</MenuItem>
-                </Select>
-              </FormControl>
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </Box>
+      {content || (
+        <Box width={{ xs: '250px', md: '300px' }} pt={'5em'}>
+          <List>
+            <Typography variant='h5'>Settings</Typography>
+            <ListItem>
+              <ListItemText>Dark mode:</ListItemText>
+              <ListItemButton>
+                <Switch />
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemText>Language:</ListItemText>
+              <ListItemButton>
+                <FormControl fullWidth>
+                  <Select
+                    labelId='demo-simple-select-label'
+                    id='demo-simple-select'
+                    value={open}
+                    label='Age'
+                    onChange={() => {}}
+                  >
+                    <MenuItem value={'english'}>English</MenuItem>
+                    <MenuItem value={'hebrew'}>Hebrew</MenuItem>
+                  </Select>
+                </FormControl>
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </Box>
+      )}
     </Root>
   )
 }

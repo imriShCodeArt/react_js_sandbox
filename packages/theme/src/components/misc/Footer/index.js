@@ -16,7 +16,7 @@ function Footer({ posts }) {
   const theme = useTheme()
   const Column = ({ title, empty }) => {
     return (
-      <Grid item xs={3} py={theme.spacing(2)} px={theme.spacing(6)}>
+      <Grid item xs={12} md={3} py={theme.spacing(2)} px={theme.spacing(6)}>
         <React.Suspense fallback={<div />}>
           <FooterHeading text={title} />
         </React.Suspense>
@@ -48,6 +48,8 @@ function Footer({ posts }) {
       container
       color={theme.palette.grey[300]}
       bgcolor={theme.palette.grey[700]}
+      overflow={'hidden'}
+      mb={{xs:'56px', md:'auto'}}
     >
       <Column title={'Recent posts:'} />
       <Column title={'Categories:'} />

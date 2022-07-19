@@ -1,49 +1,12 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
 import Root from './Root'
-import { Box, IconButton, Stack } from '@mui/material'
-import { Menu as MenuIcon } from '@mui/icons-material'
-import ThemeContext from '../../../assets/ThemeContext'
+import { Box } from '@mui/material'
+import { MyAvatar, MyLinks, MyLogo, MyMenuButton } from './components'
+const lightBorder = '1px solid rgba(0,0,0,0.1)'
 
-const ImpLink = React.lazy(() => import('components/Link'))
-const Link = ({ text, to }) => (
-  <React.Suspense fallback={<div />}>
-    <ImpLink text={text} to={to} />
-  </React.Suspense>
-)
-
-function AppBar({ logo, links, layout }) {
-  const { drawer, ...rest } = useContext(ThemeContext)
-  const openDrawer = drawer.openDrawer
-  const closeDrawer = drawer.closeDrawer
-
-  useEffect(() => {
-    openDrawer()
-  }, [])
-
-  const MyMenuButton = () => {
-    return (
-      <IconButton>
-        <MenuIcon />
-      </IconButton>
-    )
-  }
-  const MyLogo = () =>
-    logo && (
-      <Box bgcolor={'transparent'}>
-        <Link to={logo.href} text={logo.content} />
-      </Box>
-    )
-
-  const MyLinks = () => (
-    <Stack direction={'row'} spacing={'1em'}>
-      {links &&
-        links.map(({ text, href }, i) => (
-          <Link key={i} text={text} to={href} />
-        ))}
-    </Stack>
-  )
+function AppBar({ action, logo, links, layout, avatar = {} }) {
   return (
     <Root>
       <Box
@@ -51,14 +14,16 @@ function AppBar({ logo, links, layout }) {
         display={'flex'}
         alignItems={'center'}
       >
-        <MyMenuButton />
-        <MyLinks />
+        <MyMenuButton borderStyle={lightBorder} action={action} />
+        <MyLogo borderStyle={lightBorder} logo={logo} />
+        <MyLinks borderStyle={lightBorder} links={links} />
       </Box>
-      <MyLogo />
+      <MyAvatar />
     </Root>
   )
 }
 AppBar.propTypes = {
+  menu: PropTypes.shape({ action: PropTypes.func }),
   drawer: PropTypes.shape({
     anchor: PropTypes.oneOf(['left', 'top', 'right', 'bottom']),
     variant: PropTypes.oneOf(['temporary', 'permanent', 'persistant']),
@@ -83,7 +48,7 @@ AppBar.defaultProps = {
   drawer: {
     anchor: 'left',
     variant: 'temporary',
-    content: <></>,
+    content: <>APPBAR</>,
   },
   logo: {
     content: 'LOGO',
@@ -103,6 +68,7 @@ AppBar.defaultProps = {
       href: 'contact',
     },
   ],
+  menu: undefined,
 }
 
 export default AppBar

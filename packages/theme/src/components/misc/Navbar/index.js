@@ -6,8 +6,8 @@ import Typography from '@mui/material/Typography'
 import { Link, Menu } from './components'
 import ThemeContext from '../../../assets/ThemeContext'
 
-function NavBar() {
-  const links = useContext(ThemeContext()).navLinks
+function NavBar({}) {
+  const links = useContext(ThemeContext).navLinks
   const ListOfLinks = () =>
     links &&
     links.map(({ text, href, subLinks }, i) => {
@@ -51,8 +51,9 @@ function NavBar() {
       color='secondary'
       position='sticky'
       component={'nav'}
+      sx={{ display: { xs: 'none', md: 'flex' } }}
     >
-      <Box>
+      <Box textAlign={'center'}>
         <ListOfLinks />
       </Box>
     </AppBar>
