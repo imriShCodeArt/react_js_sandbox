@@ -1,24 +1,22 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
 
-const path = require('path')
 const deps = require('./package.json').dependencies
+const path = require('path')
 module.exports = {
   output: {
-    publicPath: 'http://localhost:4000/',
+    publicPath: 'http://localhost:4030/',
   },
 
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js', '.json'],
     alias: {
-      components: path.resolve(__dirname, './src/components'),
       assets: path.resolve(__dirname, './src/assets'),
-      features: path.resolve(__dirname, './src/features'),
-      vars: path.resolve(__dirname, './vars'),
     },
   },
+
   devServer: {
-    port: 4000,
+    port: 4030,
     historyApiFallback: true,
   },
 
@@ -47,16 +45,12 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-      name: 'theme',
+      name: 'nav',
       filename: 'remoteEntry.js',
       remotes: {
         components: 'components@http://localhost:4010/remoteEntry.js',
       },
-      exposes: {
-        './Theme': './src/Theme2',
-        './Column': './src/components/shared/Column',
-        './Section': './src/components/shared/Section'
-      },
+      exposes: {},
       shared: {
         ...deps,
         react: {
